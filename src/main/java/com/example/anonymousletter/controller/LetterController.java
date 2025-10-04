@@ -1,0 +1,15 @@
+package com.example.anonymousletter.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/letter")
+public class LetterController {
+
+    @GetMapping("/post")
+    public String post() {
+    return "post";
+    }
+}
