@@ -6,12 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
 public class LetterService {
+    @Autowired
+    private LetterRepository letterRepository;
 
     private final RestTemplate restTemplate = new RestTemplate();
+
+
 
     public Map<String, String> analyzeLetter(String content) {
         String url = "http://localhost:5000/analyze";
@@ -24,9 +29,6 @@ public class LetterService {
         return response; // {"sentiment": "...", "encouragement": "..."}
     }
 
-    @Autowired
-    private LetterRepository letterRepository;
-
     public Map<String, String> createLetter(String content, boolean anonymous, int userId) {
         // gọi python phân tích
         var result = analyzeLetter(content);
@@ -38,5 +40,8 @@ public class LetterService {
         letterRepository.save(letter);
 
         return result;
+    }
+    public List<Letter> anonymousLetter() {
+         return letterRepository.findByAnonymousTrue();
     }
 }

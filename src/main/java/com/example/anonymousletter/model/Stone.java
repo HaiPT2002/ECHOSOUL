@@ -14,7 +14,11 @@ import lombok.*;
 public class Stone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long stoneId;
 
-    private String name;
+    private String stoneName;
+
+    private String stoneFuction;
+
+    private String stoneMessage;
 }

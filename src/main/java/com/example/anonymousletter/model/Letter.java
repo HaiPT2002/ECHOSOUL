@@ -29,8 +29,14 @@ public class Letter {
     @JoinColumn(name = "user_id", nullable = true)  // null nếu anonymous
     private User user;
 
+    private String sentiment; // positive, neutral, negative
+
     public void setUserId(int userId) {
-        return ;
+        return;
+    }
+
+    public Object getEncouragement() {
+        return null;
     }
 
     // getters and setters
