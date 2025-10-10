@@ -47,7 +47,7 @@ public class LetterController {
     @PostMapping("/send-ajax")
     @ResponseBody
     public Map<String, String> sendLetterAjax(@RequestBody Letter letter,
-                                              @RequestParam(defaultValue = "false") boolean anonymous,
+                                             @RequestParam(defaultValue = "false") boolean anonymous,
                                               HttpSession session) {
         Integer userId = (Integer) session.getAttribute("userId");
 

@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/stone")
-public class ManifestStoneController {
+public class StoneController {
 
     @Autowired
     private StoneService stoneService;
 
-    @GetMapping()
+    @GetMapping("/detail")
     public String stoneDetail(@RequestParam("id") int id, Model model) {
         Stone stone = stoneService.getStoneById(id);
         model.addAttribute("stone", stone);
-        return "stone"; // stone.html
+        return "stone_detail"; // stone_detail.html
     }
 }
 
