@@ -32,13 +32,4 @@ public class UserService {
         if (user == null) return false;
         return passwordEncoder.matches(rawPassword, user.getPassword());
     }
-
-    public User SaoMate() {
-        List<User> users = userRepository.findAll();
-        if (users.isEmpty()) return null;
-
-        Random random = new Random();
-        int randomIndex = random.nextInt(users.size());
-        return users.get(randomIndex);
-    }
 }

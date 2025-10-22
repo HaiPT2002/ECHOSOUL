@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 public class Letter {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,23 +22,14 @@ public class Letter {
     private String content;
 
     private LocalDateTime createdAt = LocalDateTime.now();
-
-    @Column(nullable = false)
     private Boolean anonymous;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = true)  // null nếu anonymous
-    private User user;
+    @JoinColumn(name = "user_id", nullable = true)
+    private User user; // null nếu ẩn danh
 
     private String sentiment; // positive, neutral, negative
 
     public void setUserId(int userId) {
-        return;
     }
-
-    public Object getEncouragement() {
-        return null;
-    }
-
-    // getters and setters
 }

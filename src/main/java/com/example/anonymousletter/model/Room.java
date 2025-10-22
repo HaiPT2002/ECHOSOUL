@@ -2,7 +2,6 @@ package com.example.anonymousletter.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
@@ -15,20 +14,19 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 public class Room {
-    @Getter
-    @Setter
-    @jakarta.persistence.Id
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "roomId")
     private Long roomId;
 
     @ManyToOne
+    @JoinColumn(name = "user1_id")
     private User user1;
 
     @ManyToOne
+    @JoinColumn(name = "user2_id")
     private User user2;
 
     private LocalDateTime createdAt = LocalDateTime.now();
-
 }

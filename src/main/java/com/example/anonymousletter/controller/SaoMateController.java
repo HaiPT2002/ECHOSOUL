@@ -5,51 +5,45 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@Controller("/saomate")
+@Controller
+@RequestMapping("/saomate")
 public class SaoMateController {
 
     @Autowired
-    private SaomateService SaomateService;
-    @Autowired
-    private SaomateService saomateService;
+    private SaomateService saoMateService;
 
     @GetMapping
     public String saomateHome(Model model) {
-        model.addAttribute("waitting", false);
-        return "saomate_home"; // file templates/saomate_home.html
+        model.addAttribute("waiting", false);
+        return "saomate_home";
     }
 
-    // When user press Start meeting
-    @PostMapping
-    public  String ready(HttpSession session, Model model) {
-        Integer userId = (Integer) session.getAttribute("userId");
+    @PostMapping("/ready")
+    public String ready(HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("userId");
 
-        String roomId = saomateService.findPartner(userId);
+        Long roomId = saoMateService.findPartner(userId);
 
         if (roomId == null) {
-            model.addAttribute("waitting", true);
-            return "saomate_home"; // stay on the same page and show waiting message
+            model.addAttribute("waiting", true);
+            return "saomate_home";
         } else {
             return "redirect:/saomate/room/" + roomId;
         }
     }
 
-    // Room chat
     @GetMapping("/room/{roomId}")
-    public String chatRoom(@PathVariable String roomId, Model model) {
+    public String chatRoom(@PathVariable Long roomId, Model model) {
         model.addAttribute("roomId", roomId);
         return "saomate_room";
     }
 
-    // End chat session
     @PostMapping("/end")
-    public String endChat(@RequestParam String roomId) {
-        saomateService.endChat(roomId);
-        return "redirect:/saomate" + roomId;
+    public String endChat(@RequestParam Long roomId, HttpSession session) {
+        saoMateService.endChat(roomId);
+        Long userId = (Long) session.getAttribute("userId");
+        return "redirect:/saomate";
     }
 }
