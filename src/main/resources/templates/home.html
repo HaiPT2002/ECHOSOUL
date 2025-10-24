@@ -1,10 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">ECHOSOUL - Trang Chủ</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            background-color: #000;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            text-align: center;
+        }
+
+        header {
+            background: #111;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 {
+            color: yellow;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: yellow;
+        }
+
+        .banner {
+            background-image: url('/images/sky-banner.jpg');
+            background-size: cover;
+            height: 200px;
+        }
+
+        .section-title {
+            color: yellow;
+            font-size: 2rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .stones-container, .sky-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 1rem;
+        }
+
+        .stone, .sky-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            width: 200px;
+            transition: transform 0.2s;
+        }
+
+        .stone:hover, .sky-item:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .stone img, .sky-item img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        footer {
+            margin-top: 3rem;
+            background: #111;
+            padding: 1rem;
+        }
+
+        .search-bar {
+            margin-top: 2rem;
+        }
+
+        .search-bar input {
+            padding: 0.5rem;
+            width: 250px;
+        }
+    </style>
 </head>
 <body>
+
+<header>
+    <h1><a href="/" style="color:yellow; text-decoration:none;">ECHOSOUL</a></h1>
+    <nav>
+        <a href="/">Trang Chủ</a>
+        <a href="letters/send">Gửi thư</a>
+        <a href="/inbox">Bến Thư</a>
+        <a href="/sky">Bầu Trời Chung</a>
+    </nav>
+</header>
+
+<div class="banner"></div>
+
+<section>
+    <h2 class="section-title">CHỌN ĐÁ MANIFES CỦA BẠN</h2>
+    <div class="stones-container">
+        <div th:each="stone : ${stones}" class="stone">
+            <img th:src="@{'/images/stones/' + ${stone.stoneId} + '.jpg'}" alt="stone image">
+            <h3 th:text="${stone.stoneName}">Tên đá</h3>
+            <p th:text="${stone.stoneFuction}">Công dụng</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2 class="section-title">BẦU TRỜI CHUNG</h2>
+    <div class="sky-container">
+        <div th:each="letter : ${sky}" class="sky-item">
+            <img src="/images/sky-default.jpg" alt="sky image">
+            <p th:text="${letter.content}">Nội dung thư ẩn danh...</p>
+            <small th:text="${#temporals.format(letter.createdAt, 'dd/MM/yyyy HH:mm')}">Thời gian</small>
+        </div>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Hãy để những điều bạn muốn tìm...">
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 ECHOSOUL - Nơi những tâm hồn đồng điệu gặp nhau</p>
+</footer>
 
 </body>
 </html>

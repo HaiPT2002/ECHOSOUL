@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Kết nối SaoMate</title>
+  <style>
+    body {
+      background: radial-gradient(circle at top, #000428, #004e92);
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    h1 {
+      color: #ffd700;
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+
+    form {
+      margin: 20px auto;
+    }
+
+    button {
+      background: linear-gradient(90deg, #ffd700, #ffcc33);
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #000;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .waiting {
+      margin-top: 50px;
+      font-size: 1.2em;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.3; }
+      50% { opacity: 1; }
+      100% { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>Kết nối SaoMate ✨</h1>
+
+<div th:if="${!waiting}">
+  <form th:action="@{/saomate/ready}" method="post">
+    <button type="submit">Tìm bạn đồng hành</button>
+  </form>
+</div>
+
+<div class="waiting" th:if="${waiting}">
+  <p>🌠 Đang tìm một người bạn cùng tâm hồn... Hãy kiên nhẫn một chút nhé 💫</p>
+  <form th:action="@{/saomate}" method="get">
+    <button type="submit">Quay lại</button>
+  </form>
+</div>
+
+</body>
+</html>

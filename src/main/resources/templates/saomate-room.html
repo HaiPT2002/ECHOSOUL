@@ -1,0 +1,29 @@
+<textarea id="messageInput"></textarea>
+<button id="sendBtn">Gửi</button>
+<div id="messages"></div>
+
+<script>
+  const roomId = [[${roomId}]];
+
+  async function loadMessages() {
+    const res = await fetch(`/room/${roomId}/messages`);
+    const messages = await res.json();
+    document.getElementById('messages').innerHTML = messages.map(m =>
+            `<p><b>${m.senderId}:</b> ${m.content}</p>`
+    ).join('');
+  }
+
+  document.getElementById('sendBtn').onclick = async () => {
+    const content = document.getElementById('messageInput').value;
+    await fetch(`/room/${roomId}/send`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ content })
+    });
+    document.getElementById('messageInput').value = '';
+    loadMessages();
+  };
+
+  setInterval(loadMessages, 2000); // refresh 2 giây/lần
+  loadMessages();
+</script>

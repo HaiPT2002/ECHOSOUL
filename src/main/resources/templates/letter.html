@@ -1,10 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Gửi thư ẩn danh - ECHOSOUL</title>
+    <style>
+        body {
+            background: radial-gradient(circle at top, #0a0a2a, #000);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            padding: 60px;
+        }
+
+        .letter-box {
+            width: 600px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+
+        textarea {
+            width: 100%;
+            height: 180px;
+            border-radius: 10px;
+            border: none;
+            resize: none;
+            padding: 15px;
+            font-size: 15px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px 24px;
+            border: none;
+            background: linear-gradient(90deg, #ffda00, #ffb400);
+            color: #000;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #ffe54d, #ffcc00);
+        }
+
+        .encouragement-box {
+            width: 280px;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            position: sticky;
+            top: 50px;
+            box-shadow: 0 0 10px rgba(255,255,255,0.15);
+        }
+
+        .encouragement-box h3 {
+            color: #ffda00;
+            margin-bottom: 10px;
+        }
+
+        .encouragement-text {
+            font-style: italic;
+            color: #e0e0e0;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
+
+<div class="container">
+    <div class="letter-box">
+        <h2>Gửi Thư Ẩn Danh</h2>
+
+        <form th:action="@{/letters/send}" method="post" th:object="${letter}">
+            <textarea th:field="*{content}" placeholder="Viết điều bạn muốn chia sẻ..." required></textarea>
+
+            <label style="display:block;margin-top:10px;">
+                <input type="checkbox" name="anonymous" th:checked="${isAnonymous}"> Gửi ẩn danh
+            </label>
+
+            <button type="submit">Gửi Thư</button>
+        </form>
+    </div>
+
+    <div class="encouragement-box" th:if="${encouragement}">
+        <h3>Lời Động Viên 💬</h3>
+        <p class="encouragement-text" th:text="${encouragement}"></p>
+    </div>
+</div>
 
 </body>
 </html>
