@@ -44,4 +44,8 @@ public class LetterService {
     public List<Letter> anonymousLetter() {
          return letterRepository.findByAnonymousTrue();
     }
+
+//    public List<Letter> randomLettersForHomePage() {
+//        return letterRepository.findRandomLettersForHomePage();
+//    }
 }

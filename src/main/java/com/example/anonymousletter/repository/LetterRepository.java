@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface LetterRepository extends JpaRepository<Letter, Long> {
     List<Letter> findByAnonymousTrue();
+
+//    List<Letter> findRandomLettersForHomePage();
 }

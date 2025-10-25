@@ -164,8 +164,10 @@
     <h2 class="section-title">CHỌN ĐÁ MANIFES CỦA BẠN</h2>
     <div class="stones-container">
         <div th:each="stone : ${stones}" class="stone">
-            <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">
-            <h3 th:text="${stone.stoneName}">Tên đá</h3>
+            <a th:href="@{'/stone/' + ${stone.stoneId}}" style="text-decoration:none; color:white;">
+                <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">
+                <h3 th:text="${stone.stoneName}">Tên đá</h3>
+            </a>
         </div>
     </div>
 </section>
@@ -173,9 +175,9 @@
 <section>
     <h2 class="section-title">BẦU TRỜI CHUNG</h2>
     <div class="sky-container">
-        <div th:each="letter : ${sky}" class="sky-item">
+        <div th:each="sky_letters : ${sky}" class="sky-item">
             <img src="/images/sky-banner.png" alt="sky image">
-            <p th:text="${letter.content}">Nội dung thư ẩn danh...</p>
+            <p th:text="${sky_letters.content}">Nội dung thư ẩn danh...</p>
             <small th:text="${#temporals.format(letter.createdAt, 'dd/MM/yyyy HH:mm')}">Thời gian</small>
         </div>
     </div>

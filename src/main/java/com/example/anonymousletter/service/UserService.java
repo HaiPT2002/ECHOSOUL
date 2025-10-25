@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -19,7 +20,7 @@ public class UserService {
 
     // Đăng ký
     public User register(User user) {
-        if (userRepository.findByUsername(user.getUsername()) != null) {
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new RuntimeException("Username already exists");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -28,9 +29,12 @@ public class UserService {
 
     // Xác thực
     public boolean authenticate(String username, String rawPassword) {
-        User user = userRepository.findByUsername(username);
-        if (user == null) return false;
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+        if (optionalUser.isEmpty()) return false;
+
+        User user = optionalUser.get();
         return passwordEncoder.matches(rawPassword, user.getPassword());
     }
+
 
 }

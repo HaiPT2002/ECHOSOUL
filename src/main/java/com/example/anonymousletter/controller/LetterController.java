@@ -18,6 +18,13 @@ public class LetterController {
     @Autowired
     private LetterService letterService;
 
+    @GetMapping("/send")
+    public String showLetterForm(Model model) {
+        model.addAttribute("letter", new Letter());
+        model.addAttribute("isAnonymous", false);
+        return "letter";
+    }
+
     // Form submit truyền thống (Thymeleaf render lại)
     @PostMapping("/send")
     public String sendLetter(@ModelAttribute Letter letter,
@@ -39,7 +46,7 @@ public class LetterController {
         model.addAttribute("encouragement", result.get("encouragement"));
         model.addAttribute("isAnonymous", anonymous);
 
-        return "write_letter"; // reload lại trang với dữ liệu
+        return "letter"; // reload lại trang với dữ liệu
     }
 
     // API dành cho AJAX (fetch JSON)

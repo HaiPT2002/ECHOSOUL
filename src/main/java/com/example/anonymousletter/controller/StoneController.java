@@ -20,7 +20,7 @@ public class StoneController {
     public String stoneDetail(@RequestParam("id") int id, Model model) {
         Stone stone = stoneService.getStoneById(id);
         model.addAttribute("stone", stone);
-        return "stone_detail"; // stone_detail.html
+        return "stone"; // stone_detail.html
     }
 }
 

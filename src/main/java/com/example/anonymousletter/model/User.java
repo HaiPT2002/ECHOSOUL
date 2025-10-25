@@ -8,7 +8,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -30,6 +29,7 @@ public class User {
     private String username;
     private String password;
     private String confirmPassword;
+    private String email;
     private String zodiac;
     private String hobby;
     private String avatarUrl;
