@@ -37,7 +37,6 @@ public class LetterController {
         // Reset form + đưa kết quả ra model
         model.addAttribute("letter", new Letter());
         model.addAttribute("encouragement", result.get("encouragement"));
-        model.addAttribute("sentiment", result.get("sentiment"));
         model.addAttribute("isAnonymous", anonymous);
 
         return "write_letter"; // reload lại trang với dữ liệu

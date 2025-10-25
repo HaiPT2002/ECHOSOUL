@@ -22,6 +22,9 @@ public class Stone {
     private String stoneFuction;
     private String stoneMessage;
 
+    private String imageUrl; // "/images/stones/stone.png"
+
+
     // --- Quan hệ ngược với User ---
     @OneToMany(mappedBy = "stone", cascade = CascadeType.ALL)
     private List<User> users;

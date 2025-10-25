@@ -29,6 +29,7 @@ public class User {
     // --- Thông tin cơ bản ---
     private String username;
     private String password;
+    private String confirmPassword;
     private String zodiac;
     private String hobby;
     private String avatarUrl;

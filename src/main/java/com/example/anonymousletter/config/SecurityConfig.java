@@ -13,19 +13,37 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**")) // Tắt CSRF cho H2
-                .headers(headers -> headers.frameOptions(frame -> frame.disable())) // Cho phép iframe
+                // Cho phép truy cập các trang public
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**", "/login", "/register", "/css/**", "/js/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers(
+                                "/", "/home",          // Trang chủ
+                                "/login", "/register", // Form login & đăng ký
+                                "/h2-console/**",      // H2 Database console
+                                "/css/**", "/js/**", "/images/**"
+                        ).permitAll()
+                        .anyRequest().authenticated() // Còn lại phải đăng nhập
                 )
+
                 .formLogin(form -> form
-                        .loginPage("/login")
+                        .loginPage("/login")              // Hiển thị form login (GET)
+                        .loginProcessingUrl("/process-login")  // URL form gửi POST để xác thực
                         .defaultSuccessUrl("/home", true)
-                        .failureUrl("/login?error")
+                        .failureUrl("/login?error=true")
                         .permitAll()
                 )
-                .logout(logout -> logout.permitAll());
+
+                // Cấu hình logout
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout=true")
+                        .permitAll()
+                )
+
+                // CSRF — tắt hoàn toàn để tránh lỗi vòng lặp login (chỉ tạm thời trong dev)
+                .csrf(csrf -> csrf.disable())
+
+                // Cho phép nhúng H2 console trong iframe
+                .headers(headers -> headers.frameOptions(frame -> frame.disable()));
 
         return http.build();
     }

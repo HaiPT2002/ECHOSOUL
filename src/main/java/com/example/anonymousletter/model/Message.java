@@ -1,25 +1,30 @@
 package com.example.anonymousletter.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "message")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Message {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long senderId;
+    private String content;
 
     @ManyToOne
     @JoinColumn(name = "room_id")
     private Room room;
 
-    private String content;
-    private LocalDateTime timestamp = LocalDateTime.now();
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
+    private User sender;
 
-    public static Object builder() {
-    }
+    private LocalDateTime sentAt = LocalDateTime.now();
 }
