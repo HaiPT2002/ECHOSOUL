@@ -20,13 +20,13 @@ public class SecurityConfig {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    // 1️⃣ Mã hóa mật khẩu
+    // Mã hóa mật khẩu
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // 2️⃣ Provider xác thực bằng userDetailsService
+    // Provider xác thực bằng userDetailsService
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -35,13 +35,13 @@ public class SecurityConfig {
         return provider;
     }
 
-    // 3️⃣ AuthenticationManager dùng để quản lý quá trình đăng nhập
+    // AuthenticationManager dùng để quản lý quá trình đăng nhập
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
 
-    // 4️⃣ Cấu hình quyền truy cập & form login
+    // Cấu hình quyền truy cập & form login
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http

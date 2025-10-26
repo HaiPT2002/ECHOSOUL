@@ -2,7 +2,11 @@ package com.example.anonymousletter.service;
 
 import com.example.anonymousletter.model.Letter;
 import com.example.anonymousletter.repository.LetterRepository;
+import com.example.anonymousletter.repository.StoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,6 +20,8 @@ public class LetterService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
+    @Autowired
+    private StoneRepository stoneRepository;
 
 
     public Map<String, String> analyzeLetter(String content) {
@@ -41,11 +47,16 @@ public class LetterService {
 
         return result;
     }
-    public List<Letter> anonymousLetter() {
-         return letterRepository.findByAnonymousTrue();
+
+    public List<Letter> getLetters(Boolean anonymous, int number) {
+        Pageable pageable = PageRequest.of(0, number, Sort.by("createdAt").descending());
+        if (anonymous != null && anonymous) {
+            return letterRepository.findByAnonymousTrue(pageable);
+        }
+        return letterRepository.findAll(pageable).getContent();
     }
 
-//    public List<Letter> randomLettersForHomePage() {
-//        return letterRepository.findRandomLettersForHomePage();
-//    }
+    public Object getAllStones() {
+        return stoneRepository.findAll();
+    }
 }

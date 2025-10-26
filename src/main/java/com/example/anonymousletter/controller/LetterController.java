@@ -20,6 +20,8 @@ public class LetterController {
 
     @GetMapping("/send")
     public String showLetterForm(Model model) {
+        model.addAttribute("intro", "");
+        model.addAttribute("stones", letterService.getAllStones());
         model.addAttribute("letter", new Letter());
         model.addAttribute("isAnonymous", false);
         return "letter";

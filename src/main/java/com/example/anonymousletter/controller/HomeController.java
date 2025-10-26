@@ -17,19 +17,9 @@ public class HomeController {
     // Trang chủ
     @GetMapping({"/", "/home"})
     public String home(Model model) {
-
-        model.addAttribute("sky", LetterService.anonymousLetter());
+        model.addAttribute("intro", "Nơi mà tâm sự của bạn sẽ được những vì sao đón nhận. Dù bao lâu đi nữa thì những tâm tư của bạn vẫn sẽ được ghi nhớ trên vũ trụ.");
         model.addAttribute("title", "ECHOSOUL - Trang Chủ");
-        model.addAttribute("stones", stoneService.getStones());
-//        model.addAttribute("sky_letters", LetterService.randomLettersForHomePage());
+        model.addAttribute("stones", stoneService.get5RandomStones());
         return "home"; // file templates/home.html
     }
-
-    // Bến thư
-    @GetMapping("/inbox")
-    public String inboxPage(Model model) {
-        model.addAttribute("title", "Bến Thư");
-        return "inbox"; // file templates/inbox.html
-    }
-
 }

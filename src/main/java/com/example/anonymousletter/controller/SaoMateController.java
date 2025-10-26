@@ -16,8 +16,9 @@ public class SaoMateController {
 
     @GetMapping
     public String saomateHome(Model model) {
+        model.addAttribute("intro", "Xin chào, đây là nơi bạn sẽ được gặp một người nào đó trên thế giới này. Hai bạn có thể chia sẽ tất cả các điều mình muốn và vũ trụ sẽ đồng hành cùng các bạn. Hãy tận hưởng và trân trọng khoảnh khắc này nhé!");
         model.addAttribute("waiting", false);
-        return "saomate_home";
+        return "saomate";
     }
 
     @PostMapping("/ready")
@@ -28,7 +29,7 @@ public class SaoMateController {
 
         if (roomId == null) {
             model.addAttribute("waiting", true);
-            return "saomate_home";
+            return "saomate";
         } else {
             return "redirect:/saomate/room/" + roomId;
         }

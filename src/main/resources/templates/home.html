@@ -7,104 +7,8 @@
 
     <link rel="stylesheet" href="/css/style.css">
     <style>
-        body {
-            background-color: #000;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            text-align: center;
-        }
-
-        /* HEADER */
-        header {
-            background: #111;
-            padding: 1rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        /* Left: Logo */
-        .header-left h1 {
-            color: yellow;
-            font-weight: bold;
-            margin: 0;
-        }
-
-        /* Middle: Search Bar */
-        .header-center {
-            flex: 1;
-            text-align: center;
-        }
-
-        .search-bar input {
-            padding: 0.5rem;
-            width: 250px;
-            border: none;
-            border-radius: 5px;
-        }
-
-        /* Right: Login/Register */
-        .header-right .auth-link {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-
-        .header-right .auth-link:hover {
-            color: yellow;
-        }
-
-        /* NAV */
-        .main-nav {
-            margin-top: 1rem;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .main-nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 0.6rem 1.2rem;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            transition: background 0.2s, transform 0.2s;
-        }
-
-        .main-nav a:hover {
-            background: rgba(255,255,255,0.2);
-            transform: scale(1.05);
-        }
-
-        /* BANNER */
-        .banner {
-            background-image: url('/images/sky-banner.png');
-            background-size: cover;
-            background-position: center;
-            height: 200px;
-        }
-
-        /* TIÊU ĐỀ PHẦN */
-        .section-title {
-            color: yellow;
-            font-size: 2rem;
-            margin: 2rem 0 1rem;
-        }
-
-        /* DANH SÁCH ĐÁ / THƯ */
-        .stones-container, .sky-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.5rem;
-            padding: 1rem;
-        }
-
         /* STONE / LETTER */
-        .stone, .sky-item {
+        .stone, .letter-item {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             padding: 1rem;
@@ -112,24 +16,17 @@
             transition: transform 0.2s;
         }
 
-        .stone:hover, .sky-item:hover {
+        .stone:hover, .letter-item:hover {
             transform: scale(1.05);
             background: rgba(255, 255, 255, 0.2);
         }
 
-        .stone img, .sky-item img {
+        .stone img, .letter-item img {
             width: 100%;
             height: 180px;
             object-fit: contain;
             border-radius: 8px;
             background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* FOOTER */
-        footer {
-            margin-top: 3rem;
-            background: #111;
-            padding: 1rem;
         }
     </style>
 </head>
@@ -156,6 +53,7 @@
     <a href="/letters/send">Gửi thư</a>
     <a href="/inbox">Bến Thư</a>
     <a href="/sky">Bầu Trời Chung</a>
+    <a href="/saomate">Trạm Sao Mate</a>
 </nav>
 
 <div class="banner"></div>
@@ -171,18 +69,6 @@
         </div>
     </div>
 </section>
-
-<section>
-    <h2 class="section-title">BẦU TRỜI CHUNG</h2>
-    <div class="sky-container">
-        <div th:each="sky_letters : ${sky}" class="sky-item">
-            <img src="/images/sky-banner.png" alt="sky image">
-            <p th:text="${sky_letters.content}">Nội dung thư ẩn danh...</p>
-            <small th:text="${#temporals.format(letter.createdAt, 'dd/MM/yyyy HH:mm')}">Thời gian</small>
-        </div>
-    </div>
-</section>
-
 <footer>
     <p>© 2025 ECHOSOUL - Nơi những tâm hồn đồng điệu gặp nhau</p>
 </footer>

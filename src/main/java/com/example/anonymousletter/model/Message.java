@@ -3,6 +3,7 @@ package com.example.anonymousletter.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "message")
@@ -25,6 +26,14 @@ public class Message {
     @ManyToOne
     @JoinColumn(name = "sender_id")
     private User sender;
+
+    @ManyToOne
+    @JoinColumn(name = "reply_to_id")
+    private Message replyTo;
+    
+    @ManyToOne
+    @JoinColumn(name = "stoneId")
+    private Stone stone;
 
     private LocalDateTime sentAt = LocalDateTime.now();
 }

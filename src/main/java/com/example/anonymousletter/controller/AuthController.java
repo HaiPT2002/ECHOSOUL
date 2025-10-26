@@ -24,9 +24,9 @@ public class AuthController {
 
     // Hiển thị form đăng ký
     @GetMapping("/register")
-    public String showRegisterPage(@ModelAttribute User user, Model model) {
+    public String showRegisterPage(Model model) {
         model.addAttribute("user", new User());
-        return "register"; // trả về tên file template: register.html
+        return "register";
     }
 
     // Xử lý form đăng ký
@@ -34,7 +34,7 @@ public class AuthController {
     public String handleRegister(@ModelAttribute User user, Model model) {
         try {
             userService.register(user);
-            return "redirect:/login";
+            return "redirect:/login?registered=true";
         } catch (Exception e) {
             model.addAttribute("error", "Tên đăng nhập đã tồn tại!");
             return "register";

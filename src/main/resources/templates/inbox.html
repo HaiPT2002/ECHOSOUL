@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<section>
+    <h2 class="section-title">BẦU TRỜI CHUNG</h2>
+    <div class="letter-container">
+        <div th:each="sky_letters : ${sky}" class="letter-item">
+            <img src="/images/sky-banner.png" alt="sky image">
+            <p th:text="${sky_letters.content}">Nội dung thư ẩn danh...</p>
+            <small th:text="${#temporals.format(letter.createdAt, 'dd/MM/yyyy HH:mm')}">Thời gian</small>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
