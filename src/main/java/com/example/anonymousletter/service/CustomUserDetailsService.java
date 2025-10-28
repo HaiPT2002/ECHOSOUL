@@ -3,10 +3,15 @@ package com.example.anonymousletter.service;
 import com.example.anonymousletter.model.User;
 import com.example.anonymousletter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
+import java.util.List;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -15,20 +20,20 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Không tìm thấy người dùng: " + username));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getUsername())
-                .password(user.getPassword()) // phải là password đã được BCrypt mã hóa
-                .roles(String.valueOf(user.getRole())) // VD: ADMIN, USER
-                .build();
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(),
+                user.getPassword(),
+                getAuthorities(user)
+        );
     }
 
-    // Dùng để mã hóa mật khẩu khi cần
-    public static String encodePassword(String rawPassword) {
-        return new BCryptPasswordEncoder().encode(rawPassword);
+    private Collection<? extends GrantedAuthority> getAuthorities(User user) {
+        return List.of(new SimpleGrantedAuthority(user.getRole().getRoleName()));
     }
 }
+

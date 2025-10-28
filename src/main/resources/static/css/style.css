@@ -95,7 +95,14 @@ header {
     flex-wrap: wrap;
     gap: 1.5rem;
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.page-center {
+    min-height: 100vh; /* chiếm toàn bộ chiều cao màn hình */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* ================== COMMON ITEM BOX ================== */
@@ -229,6 +236,61 @@ textarea {
 .back-home:hover,
 .login-link:hover {
     text-decoration: underline;
+}
+
+/* ================== USER MENU ================== */
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.user-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #ffda00;
+    transition: transform 0.2s;
+}
+
+.user-icon img:hover {
+    transform: scale(1.1);
+}
+
+/* ================== DROPDOWN MENU ================== */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: rgba(30, 30, 30, 0.95);
+    border-radius: 10px;
+    min-width: 200px;
+    box-shadow: 0 0 10px rgba(255,255,255,0.15);
+    z-index: 1000;
+}
+
+.dropdown-content a,
+.dropdown-content button {
+    display: block;
+    padding: 12px 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    border: none;
+    background: none;
+    text-align: left;
+    width: 100%;
+}
+
+.dropdown-content a:hover,
+.dropdown-content button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* =================== LOG OUT ================== */
+.logout-btn {
+    color: #ff7777;
+    cursor: pointer;
 }
 
 /* ================== FOOTER ================== */

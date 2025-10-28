@@ -5,6 +5,7 @@ import com.example.anonymousletter.model.User;
 import com.example.anonymousletter.repository.RoleRepository;
 import com.example.anonymousletter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class UserService {
             throw new RuntimeException("Tên đăng nhập đã tồn tại!");
         }
 
-        Role defaultRole = roleRepository.findByRoleName("USER")
+        Role defaultRole = roleRepository.findByRoleName("user")
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy vai trò mặc định"));
 
         user.setRole(defaultRole);
@@ -36,9 +37,13 @@ public class UserService {
 
         return userRepository.save(user);
     }
-    
+
     // Check premium
     public boolean isPremium(User user) {
         return Boolean.TRUE.equals(user.getRole().getRoleName().equals("premium"));
+    }
+
+    public User getUserByUsername(UserDetails userDetails) {
+        return userRepository.findByUsername(userDetails.getUsername()).orElse(null);
     }
 }

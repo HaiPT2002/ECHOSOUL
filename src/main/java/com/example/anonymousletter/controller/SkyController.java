@@ -9,13 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/sky-letter")
 public class SkyController {
     @Autowired
     private LetterService letterService;
     @Autowired
     private UserService userService;
 
+    @RequestMapping("/sky-letter")
     public String skyLetter(Model model, User user) {
         if (!userService.isPremium(user)) {
             return "redirect:/login";

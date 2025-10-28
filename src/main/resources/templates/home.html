@@ -44,12 +44,34 @@
     </div>
 
     <div class="header-right">
-        <a href="/login" class="auth-link">Đăng nhập</a> /
-        <a href="/register" class="auth-link">Đăng ký</a>
+        <!-- Nếu người dùng CHƯA đăng nhập -->
+        <div th:if="${user == null or user.username == null}">
+            <a href="/login" class="auth-link">Đăng nhập</a> /
+            <a href="/register" class="auth-link">Đăng ký</a>
+        </div>
+
+        <!-- Nếu người dùng ĐÃ đăng nhập -->
+        <div th:if="${user != null and user.username != null}" class="user-menu">
+            <div class="user-icon" onclick="toggleDropdown()">
+                <img src="/images/user-icon.png" alt="User Icon">
+            </div>
+            <div id="dropdown" class="dropdown-content">
+                <a href="/profile">👤 Thông tin cá nhân</a>
+                <a href="/premium">⭐ Nâng cấp Premium</a>
+                <a href="/sent">💌 Thư đã gửi</a>
+                <a href="/inbox">📥 Hòm thư đến</a>
+                <a href="/settings">⚙️ Cài đặt tài khoản</a>
+                <form th:action="@{/logout}" method="post" style="margin:0;">
+                    <button type="submit" class="logout-btn">🚪 Đăng xuất</button>
+                </form>
+            </div>
+        </div>
     </div>
+
 </header>
 
 <nav class="main-nav">
+    <a href="/">Trang Chủ</a>
     <a href="/letters/send">Gửi thư</a>
     <a href="/inbox">Bến Thư</a>
     <a href="/sky">Bầu Trời Chung</a>
@@ -75,6 +97,15 @@
 
 </body>
 
+<script>
+    function toggleDropdown() {
+        document.getElementById("dropdown").classList.toggle("show");
+    }
+    window.onclick = function(e) {
+        if (!e.target.closest('.user-menu')) {
+            document.getElementById("dropdown").classList.remove("show");
+        }
+    };
+</script>
 
-</body>
 </html>
