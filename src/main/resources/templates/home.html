@@ -7,20 +7,6 @@
 
     <link rel="stylesheet" href="/css/style.css">
     <style>
-        /* STONE / LETTER */
-        .stone, .letter-item {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 1rem;
-            width: 200px;
-            transition: transform 0.2s;
-        }
-
-        .stone:hover, .letter-item:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
         .stone img, .letter-item img {
             width: 100%;
             height: 180px;
@@ -34,13 +20,9 @@
 
 <header>
     <div class="header-left">
-        <h1><a href="/" style="color:yellow; text-decoration:none;">ECHOSOUL</a></h1>
-    </div>
-
-    <div class="header-center">
-        <div class="search-bar">
-            <input type="text" placeholder="Hãy để những điều bạn muốn tìm...">
-        </div>
+        <a href="/">
+            <img src="/images/logo.png" alt="Echosoul logo">
+        </a>
     </div>
 
     <div class="header-right">
@@ -74,25 +56,26 @@
     <a href="/">Trang Chủ</a>
     <a href="/letters/send">Gửi thư</a>
     <a href="/inbox">Bến Thư</a>
-    <a href="/sky">Bầu Trời Chung</a>
+    <a href="/sky-letter">Bầu Trời Chung</a>
     <a href="/saomate">Trạm Sao Mate</a>
 </nav>
 
 <div class="banner"></div>
 
-<section>
-    <h2 class="section-title">CHỌN ĐÁ MANIFES CỦA BẠN</h2>
-    <div class="stones-container">
-        <div th:each="stone : ${stones}" class="stone">
-            <a th:href="@{'/stone/' + ${stone.stoneId}}" style="text-decoration:none; color:white;">
-                <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">
-                <h3 th:text="${stone.stoneName}">Tên đá</h3>
-            </a>
-        </div>
+<p style="text-align:center; max-width:700px; margin:0 auto 2rem; color:#ccc;" th:text="${intro}">
+</p>
+
+<h2 class="section-title">Hãy chọn viên đá thuộc về bạn</h2>
+<div class="stones-container">
+    <div th:each="stone : ${stones}" class="stone">
+        <a th:href="@{'/stones/' + ${stone.stoneName}}">
+            <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">
+            <h3 th:text="${stone.stoneName}">Tên đá</h3>
+        </a>
     </div>
-</section>
+</div>
 <footer>
-    <p>© 2025 ECHOSOUL - Nơi những tâm hồn đồng điệu gặp nhau</p>
+    <p>© 2025 ECHOSOUL - </p>
 </footer>
 
 </body>

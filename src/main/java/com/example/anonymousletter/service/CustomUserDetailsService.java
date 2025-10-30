@@ -33,7 +33,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(User user) {
+        if (user.getRole() == null || user.getRole().getRoleName() == null) {
+            return List.of(new SimpleGrantedAuthority("user"));
+        }
         return List.of(new SimpleGrantedAuthority(user.getRole().getRoleName()));
     }
+
 }
 

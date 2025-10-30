@@ -2,12 +2,15 @@ package com.example.anonymousletter.controller;
 
 import com.example.anonymousletter.model.Letter;
 import com.example.anonymousletter.service.LetterService;
+import com.example.anonymousletter.service.StoneService;
+import com.example.anonymousletter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
 
@@ -17,11 +20,13 @@ public class LetterController {
 
     @Autowired
     private LetterService letterService;
+    @Autowired
+    private StoneService stoneService;
 
     @GetMapping("/send")
     public String showLetterForm(Model model) {
         model.addAttribute("intro", "");
-        model.addAttribute("stones", letterService.getAllStones());
+        model.addAttribute("stones", stoneService.getStones());
         model.addAttribute("letter", new Letter());
         model.addAttribute("isAnonymous", false);
         return "letter";

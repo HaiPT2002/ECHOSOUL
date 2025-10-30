@@ -40,7 +40,10 @@ public class UserService {
 
     // Check premium
     public boolean isPremium(User user) {
-        return Boolean.TRUE.equals(user.getRole().getRoleName().equals("premium"));
+        if (user == null || user.getRole() == null) return false;
+
+        String roleName = user.getRole().getRoleName().toLowerCase();
+        return roleName.equals("premium") || roleName.equals("admin");
     }
 
     public User getUserByUsername(UserDetails userDetails) {

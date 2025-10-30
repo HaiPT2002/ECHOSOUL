@@ -2,7 +2,6 @@ package com.example.anonymousletter.controller;
 
 import com.example.anonymousletter.model.User;
 import com.example.anonymousletter.service.UserService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -39,8 +38,7 @@ public class AuthController {
             model.addAttribute("error", "Tên đăng nhập đã tồn tại!");
             return "register";
         }
-    }
-}
+    }}
 
 
 

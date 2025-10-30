@@ -9,18 +9,18 @@ body {
 
 /* ================== HEADER ================== */
 header {
-    background: #111;
-    padding: 1rem 2rem;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background-color: #000;
 }
 
-.header-left h1 {
-    color: yellow;
-    font-weight: bold;
-    margin: 0;
+.header-left img {
+    height: 80px;
+    width: auto;
 }
+
 
 .header-center {
     flex: 1;
@@ -43,7 +43,7 @@ header {
 }
 
 .header-right .auth-link:hover {
-    color: yellow;
+    color: #D6E010;
 }
 
 /* NAVIGATION */
@@ -58,7 +58,7 @@ header {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    padding: 0.6rem 1.2rem;
+    padding: 1rem 2rem;
     background: rgba(255,255,255,0.1);
     border-radius: 10px;
     transition: background 0.2s, transform 0.2s;
@@ -79,7 +79,7 @@ header {
 
 /* SECTION TITLE */
 .section-title {
-    color: yellow;
+    color: #D6E010;
     font-size: 2rem;
     margin: 2rem 0 1rem;
     text-align: center;
@@ -95,7 +95,7 @@ header {
     flex-wrap: wrap;
     gap: 1.5rem;
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.03);
+    background: transparent;
 }
 
 .page-center {
@@ -127,6 +127,74 @@ header {
     background: rgba(255, 255, 255, 0.2);
 }
 
+/* ================== BỐ CỤC LƯỚI THƯ ================== */
+.letter-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+}
+
+.letter-card {
+    background-color: #1e1e2f;
+    color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    padding: 16px;
+    width: 100%;
+    max-width: 280px;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease;
+}
+
+.letter-card:hover {
+    transform: translateY(-6px);
+}
+
+.letter-content img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.letter-date {
+    color: #aaa;
+    font-size: 0.85em;
+    text-align: right;
+}
+
+.reply-button {
+    background-color: #ffda00;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.reply-button:hover {
+    background-color: #ffda00;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+    .letter-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .letter-container {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* ================== BUTTON CHUNG ================== */
 button {
     margin-top: 15px;
@@ -143,6 +211,74 @@ button {
 button:hover {
     transform: scale(1.05);
     background: linear-gradient(90deg, #ffe54d, #ffcc00);
+}
+
+/* ================== STONE ===================*/
+.stones-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+.stone-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stone-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 15px #D6E010;
+}
+.stone-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+.stone-card h3 {
+    color: #D6E010;
+    margin: 0.5rem 0;
+}
+.stone-card p {
+    font-size: 0.9rem;
+    color: #ccc;
+    height: 70px;
+    overflow: hidden;
+}
+
+.stone-detail {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 900px;
+    margin: 2rem auto;
+    gap: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 20px;
+}
+.stone-detail img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    flex: 1;
+}
+.stone-info {
+    flex: 2;
+}
+.stone-info h2 {
+    color: #D6E010;
+    margin-bottom: 1rem;
+}
+.stone-info h3 {
+    margin-top: 1.5rem;
+    color: #D6E010;
+}
+.stone-info p {
+    color: #ccc;
+    line-height: 1.6;
 }
 
 /* ================== TEXTAREA ================== */
@@ -170,7 +306,7 @@ textarea {
 }
 
 .encouragement-box h3 {
-    color: #ffda00;
+    color: #D6E010;
     margin-bottom: 10px;
 }
 
@@ -200,7 +336,7 @@ textarea {
 
 .form-container h2 {
     margin-bottom: 25px;
-    color: #ffda00;
+    color: #D6E010;
 }
 
 .form-container input {
@@ -229,7 +365,7 @@ textarea {
     display: block;
     margin-top: 15px;
     font-size: 14px;
-    color: #ffda00;
+    color: #D6E010;
     text-decoration: none;
 }
 
@@ -249,7 +385,7 @@ textarea {
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
-    border: 2px solid #ffda00;
+    border: 2px solid #D6E010;
     transition: transform 0.2s;
 }
 
@@ -286,6 +422,11 @@ textarea {
 .dropdown-content button:hover {
     background: rgba(255, 255, 255, 0.1);
 }
+
+.dropdown-content.show {
+    display: block;
+}
+
 
 /* =================== LOG OUT ================== */
 .logout-btn {

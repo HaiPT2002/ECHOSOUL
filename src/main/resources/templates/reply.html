@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Phản hồi thư</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <div class="header-left">
+        <h1>Echosoul</h1>
+    </div>
+    <div class="header-right">
+        <a th:href="@{/logout}" class="auth-link">Đăng xuất</a>
+    </div>
+</header>
+
+<nav class="main-nav">
+    <a href="/">Trang Chủ</a>
+    <a href="/letters/send">Gửi thư</a>
+    <a href="/inbox">Bến Thư</a>
+    <a href="/sky">Bầu Trời Chung</a>
+    <a href="/saomate">Trạm Sao Mate</a>
+</nav>
+
+<div class="banner"></div>
+
+
+    <h2 class="section-title" th:text="${title}">Bến Thư</h2>
+
+    <p style="text-align:center; max-width:700px; margin:0 auto 2rem; color:#ccc;" th:text="${intro}">
+    </p>
+
+    <div class="letter-box">
+        <p><strong>Nội dung thư:</strong></p>
+        <blockquote th:text="${letter.content}"></blockquote>
+    </div>
+
+    <div th:each="resp : ${responses}" class="response-box">
+        <p th:text="${resp.content}"></p>
+        <small th:text="${#temporals.format(resp.createdAt, 'dd/MM/yyyy HH:mm')}"></small>
+    </div>
+
+    <form th:action="@{'/letters/reply/' + ${letter.id}}" method="post">
+        <textarea name="replyContent" rows="4" cols="50" placeholder="Viết phản hồi..."></textarea><br>
+        <button type="submit">Gửi phản hồi</button>
+    </form>
+
+    <h3>Các phản hồi:</h3>
+    <div th:if="${#lists.isEmpty(responses)}">
+        <p>Chưa có phản hồi nào.</p>
+    </div>
+
+<footer>
+    <p>© 2025 ECHOSOUL - Nơi những tâm hồn đồng điệu gặp nhau</p>
+</footer>
+</body>
+</html>

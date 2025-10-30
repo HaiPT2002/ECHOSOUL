@@ -16,11 +16,7 @@ public class SkyController {
     private UserService userService;
 
     @RequestMapping("/sky-letter")
-    public String skyLetter(Model model, User user) {
-        if (!userService.isPremium(user)) {
-            return "redirect:/login";
-        }
-        model.addAttribute("title", "Bầu trời chung");
+    public String skyLetter(Model model) {
         model.addAttribute("intro", "");
         model.addAttribute("skyLetters", letterService.getLetters(true, 6));
         return "sky-letter";

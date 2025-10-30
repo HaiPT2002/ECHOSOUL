@@ -25,18 +25,19 @@
 
 <div class="banner"></div>
 
-<p class="section-intro" th:text="${intro}"></p>
 
-<section>
-    <h2 class="section-title" th:text="${title}"></h2>
-    <div class="stones-container">
-        <div th:each="stone : ${stones}" class="stone-card">
-            <a th:href="@{'/stones/' + ${stone.stoneName}}">
-                <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">
-                <h3 th:text="${stone.stoneName}">Tên Đá</h3>
-            </a>
-            <p th:text="${stone.stoneFunction}">Chức năng của đá</p>
-        </div>
+<section class="stone-detail">
+    <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">
+    <div class="stone-info">
+        <h2 th:text="${stone.stoneName}">Tên Đá</h2>
+        <h3>Tác dụng</h3>
+        <p th:text="${stone.stoneFunction}">Tác dụng và năng lượng tích cực của viên đá...</p>
+        <h3>Thông điệp:</h3>
+        <p th:text="${stone.stoneMessage}">Thông điệp của viên đá...</p>
+
+        <form th:action="@{'/stones/select/' + ${stone.stoneId}}" method="post">
+            <button type="submit" class="choose-btn">Chọn viên đá này</button>
+        </form>
     </div>
 </section>
 

@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 @Table(name = "stone")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -16,10 +17,11 @@ public class Stone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "stone_id")
     private Long stoneId;
 
     private String stoneName;
-    private String stoneFuction;
+    private String stoneFunction;
     private String stoneMessage;
 
     private String imageUrl; // "/images/stones/stone.png"
@@ -28,4 +30,9 @@ public class Stone {
     // --- Quan hệ ngược với User ---
     @OneToMany(mappedBy = "stone", cascade = CascadeType.ALL)
     private List<User> users;
+
+    // --- Quan hệ ngược với Letter ---
+    @OneToMany(mappedBy = "stone", cascade = CascadeType.ALL)
+    private List<Letter> letters;
+
 }

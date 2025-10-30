@@ -1,22 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${title}">Bến Thư</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
+<header>
+    <div class="header-left">
+        <h1>Anonymous Letters</h1>
+    </div>
+    <div class="header-center">
+        <nav class="main-nav">
+            <a th:href="@{/home}">Trang chủ</a>
+            <a th:href="@{/inbox}" class="active">Bến Thư</a>
+            <a th:href="@{/write}">Viết thư</a>
+        </nav>
+    </div>
+    <div class="header-right">
+        <a th:href="@{/logout}" class="auth-link">Đăng xuất</a>
+    </div>
+</header>
 
+<!-- Banner -->
+<div class="banner"></div>
+
+<!-- Nội dung chính -->
 <section>
-    <h2 class="section-title">BẦU TRỜI CHUNG</h2>
+    <h2 class="section-title" th:text="${title}">Bến Thư</h2>
+
+    <p style="text-align:center; max-width:700px; margin:0 auto 2rem; color:#ccc;" th:text="${intro}">
+    </p>
+
     <div class="letter-container">
-        <div th:each="sky_letters : ${sky}" class="letter-item">
-            <img src="/images/sky-banner.png" alt="sky image">
-            <p th:text="${sky_letters.content}">Nội dung thư ẩn danh...</p>
-            <small th:text="${#temporals.format(letter.createdAt, 'dd/MM/yyyy HH:mm')}">Thời gian</small>
+        <!-- Lặp mỗi bức thư -->
+        <div th:each="letter : ${letters}" class="letter-card">
+
+            <div class="letter-content">
+                <img src="/images/sky-banner.png" alt="Ảnh thư ẩn danh">
+                <p th:text="${letter.content}">Nội dung thư ẩn danh...</p>
+                <p><strong>Đá:</strong>
+                    <span th:text="${letter.stone != null ? letter.stone.stoneName : 'Chưa có'}"></span>
+                </p>
+            </div>
+
+            <small class="letter-date"
+                   th:text="${#temporals.format(letter.createdAt, 'dd/MM/yyyy HH:mm')}">
+                Thời gian
+            </small>
+
+            <!-- Nút phản hồi -->
+            <form th:action="@{'/letters/reply/' + ${letter.id}}" method="get" style="text-align: right;">
+                <button type="submit" class="reply-button">Phản hồi</button>
+            </form>
+
         </div>
     </div>
+
 </section>
+
+<footer>
+    <p>&copy; 2025 ECHOSOUL - Nơi những tâm hồn đồng điệu gặp nhau.</p>
+</footer>
 
 </body>
 </html>

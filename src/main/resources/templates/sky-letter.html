@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${title}">Phản hồi thư</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+<header>
+    <div class="header-left">
+        <h1>Echosoul</h1>
+    </div>
+    <div class="header-right">
+        <a th:href="@{/logout}" class="auth-link">Đăng xuất</a>
+    </div>
+</header>
 
+<nav class="main-nav">
+    <a href="/">Trang Chủ</a>
+    <a href="/letters/send">Gửi thư</a>
+    <a href="/inbox">Bến Thư</a>
+    <a href="/sky">Bầu Trời Chung</a>
+    <a href="/saomate">Trạm Sao Mate</a>
+</nav>
+
+<div class="banner"></div>
+
+<section>
+    <h2 class="section-title" th:text="${title}">Bầu Trời Chung</h2>
+
+    <p class="section-intro" th:text="${intro}">
+    </p>
+
+    <div class="sky-container">
+        <div th:each="letter : ${skyLetters}" class="sky-card">
+
+            <!-- ảnh/preview (nếu letter.stone có imageUrl thì dùng, nếu không dùng banner chung) -->
+            <img th:src="${letter.stone != null && letter.stone.imageUrl != null ? letter.stone.imageUrl : '/images/sky-banner.png'}"
+                 alt="ảnh thư">
+
+            <div class="content" th:text="${letter.content}">Nội dung thư ẩn danh...</div>
+
+        </div>
+    </div>
+</section>
+<footer>
+    <p>© 2025 ECHOSOUL - Nơi những tâm hồn đồng điệu gặp nhau</p>
+</footer>
 </body>
 </html>

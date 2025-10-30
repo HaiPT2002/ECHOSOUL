@@ -23,6 +23,9 @@ public class LetterService {
     @Autowired
     private StoneRepository stoneRepository;
 
+    @Autowired
+    private ResponseService responseService;
+
 
     public Map<String, String> analyzeLetter(String content) {
         String url = "http://localhost:5000/analyze";
@@ -56,7 +59,7 @@ public class LetterService {
         return letterRepository.findAll(pageable).getContent();
     }
 
-    public Object getAllStones() {
-        return stoneRepository.findAll();
+    public Letter getLetterById(Long id) {
+        return letterRepository.findById(id).orElse(null);
     }
 }
