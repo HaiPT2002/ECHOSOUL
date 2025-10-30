@@ -25,6 +25,8 @@ public class LetterController {
 
     @GetMapping("/send")
     public String showLetterForm(Model model) {
+        model.addAttribute("title", "ECHOSOUL - Gửi nỗi lòng của bạn");
+        model.addAttribute("page", "send");
         model.addAttribute("intro", "");
         model.addAttribute("stones", stoneService.getStones());
         model.addAttribute("letter", new Letter());

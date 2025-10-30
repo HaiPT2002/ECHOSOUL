@@ -14,24 +14,20 @@ header {
     align-items: center;
     padding: 10px 40px;
     background-color: #000;
+    box-shadow: 0 2px 10px rgba(255, 255, 0, 0.1);
+    position: sticky;      /* giữ cố định khi cuộn */
+    top: 0;
+    z-index: 1000;
 }
 
 .header-left img {
-    height: 80px;
+    height: 70px;
     width: auto;
+    transition: transform 0.3s ease;
 }
 
-
-.header-center {
-    flex: 1;
-    text-align: center;
-}
-
-.search-bar input {
-    padding: 0.5rem;
-    width: 250px;
-    border: none;
-    border-radius: 5px;
+.header-left img:hover {
+    transform: scale(1.05);
 }
 
 /* HEADER RIGHT - LOGIN / REGISTER LINKS */
@@ -46,86 +42,103 @@ header {
     color: #D6E010;
 }
 
-/* NAVIGATION */
+/* ================== NAVIGATION ================== */
 .main-nav {
-    margin-top: 1rem;
+    width: 100%;                  /* phủ toàn bộ chiều rộng */
     display: flex;
-    justify-content: center;
-    gap: 2rem;
+    justify-content: center;      /* căn giữa các nút */
+    align-items: center;
+    gap: 3rem;
+    background: #bfbfbf;          /* nền xám sáng */
+    padding: 1rem 0;              /* thêm khoảng cách dọc */
+    margin: 0;                    /* bỏ margin để sát mép */
+    border-top: 2px solid #000;   /* viền trên nếu muốn nổi rõ */
+    border-bottom: 2px solid #000;/* viền dưới nhẹ */
 }
 
 .main-nav a {
-    color: white;
+    color: #000;                  /* chữ đen */
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 700;
     padding: 1rem 2rem;
-    background: rgba(255,255,255,0.1);
-    border-radius: 10px;
-    transition: background 0.2s, transform 0.2s;
+    border-radius: 40px;          /* bo tròn mềm mại */
+    background: transparent;
+    transition: all 0.2s ease;
 }
 
+/* Hover nhẹ */
 .main-nav a:hover {
-    background: rgba(255,255,255,0.2);
+    background: rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Trang hiện tại */
+.main-nav a.active {
+    background: #000;             /* nền đen nổi bật */
+    color: #fff;                  /* chữ trắng */
+    pointer-events: none;         /* tắt click */
+    transform: none;
+}
+
+.main-nav a {
+    font-size: 1.4rem; /* or use px like 18px */
+}
+
+/* ================== INTRO TEXT TRÊN BANNER ================== */
+
+.intro-text {
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 1.8;
+    text-align: center;
+    max-width: 800px;
+    margin: 2rem auto;
+    font-weight: 500;
+    opacity: 0.95;
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.9); /* chữ rõ hơn trên nền tối */
+}
+
+
+/* === CÁC KHỐI CHÍNH (không bị mờ) === */
+.stones-container,
+.letter-container,
+.common-item,
+.letter-card,
+.stone-card,
+.stone-detail,
+.container {
+    position: relative;
+    z-index: 1; /* cao hơn banner nhưng không cần isolate */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* === CARD / ITEM HIỂN THỊ TRÊN NỀN MỜ === */
+.stone-card,
+.letter-card,
+.common-item {
+    background: rgba(255, 255, 255, 0.07); /* mờ nhẹ, không làm mất chi tiết */
+    border-radius: 16px;
+    transition: 0.3s ease;
+}
+
+/* Nếu bạn có hover */
+.stone-card:hover,
+.letter-card:hover {
     transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.12);
 }
 
-/* BANNER */
-.banner {
-    background-image: url('/images/sky-banner.png');
-    background-size: cover;
-    background-position: center;
-    height: 200px;
-}
 
-/* SECTION TITLE */
+/* ================== SECTION TITLE (trong banner) ================== */
 .section-title {
     color: #D6E010;
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin: 2rem 0 1rem;
     text-align: center;
+    text-shadow: 0 0 12px rgba(0,0,0,0.8);
 }
 
-/* ================== COMMON CONTAINERS ================== */
-.container,
-.stones-container,
-.letter-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    padding: 1rem;
-    background: transparent;
-}
-
-.page-center {
-    min-height: 100vh; /* chiếm toàn bộ chiều cao màn hình */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* ================== COMMON ITEM BOX ================== */
-.common-item {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    padding: 1rem;
-    width: 200px;
-    transition: transform 0.2s, background 0.2s;
-}
-
-.common-item img {
-    width: 100%;
-    height: 180px;
-    object-fit: contain;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.common-item:hover {
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.2);
-}
 
 /* ================== BỐ CỤC LƯỚI THƯ ================== */
 .letter-container {
@@ -206,15 +219,18 @@ button {
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
+    box-shadow: 0 0 10px rgba(255, 218, 0, 0.3);
 }
 
 button:hover {
     transform: scale(1.05);
     background: linear-gradient(90deg, #ffe54d, #ffcc00);
+    box-shadow: 0 0 20px rgba(255, 218, 0, 0.6);
 }
 
 /* ================== STONE ===================*/
 .stones-container {
+    background: radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 70%);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
@@ -223,7 +239,7 @@ button:hover {
     padding: 1rem;
 }
 .stone-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 15px;
     padding: 1.5rem;
     text-align: center;
@@ -231,20 +247,26 @@ button:hover {
 }
 .stone-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 0 15px #D6E010;
+    box-shadow: 0 0 30px #D6E010;
+    background: rgba(255, 255, 255, 0.25);
 }
 .stone-card img {
     width: 100px;
     height: 100px;
     object-fit: contain;
+    filter: brightness(1.1);
 }
 .stone-card h3 {
+    color: #ddd;
+    margin: 0.5rem 0;
+}
+.stone-card h2 {
     color: #D6E010;
     margin: 0.5rem 0;
 }
 .stone-card p {
     font-size: 0.9rem;
-    color: #ccc;
+    color: #eee;
     height: 70px;
     overflow: hidden;
 }
@@ -274,12 +296,46 @@ button:hover {
 }
 .stone-info h3 {
     margin-top: 1.5rem;
-    color: #D6E010;
+    color: #EAE36F;
 }
 .stone-info p {
-    color: #ccc;
+    color: #ddd;
     line-height: 1.6;
 }
+
+.stone-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+/* --------------- BUTTON -------------*/
+
+.button {
+    display: inline-block;
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #000;
+    background: linear-gradient(135deg, #ffda00, #ffb400);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 218, 0, 0.3);
+    text-decoration: none; /* nếu là <a> */
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #ffe54d, #ffcc00);
+    box-shadow: 0 0 20px rgba(255, 218, 0, 0.6);
+}
+
+.button:active {
+    transform: translateY(1px);
+    box-shadow: 0 0 10px rgba(255, 218, 0, 0.6);
+}
+
 
 /* ================== TEXTAREA ================== */
 textarea {
@@ -434,6 +490,32 @@ textarea {
     cursor: pointer;
 }
 
+/* ================== BANNER ================== */
+.banner {
+    width: 100%;
+    min-height: calc(100vh - 250px); /* bao phủ phần giữa nav và footer */
+    background: url('/images/sky-banner.jpg') center/cover fixed;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+    z-index: 0; /* banner nằm dưới nội dung chính */
+}
+
+.banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(1.5px);
+    z-index: -1; /* luôn ở dưới nội dung banner */
+    pointer-events: none;
+}
+
+
+
 /* ================== FOOTER ================== */
 footer {
     margin-top: 3rem;
@@ -441,3 +523,4 @@ footer {
     padding: 1rem;
     text-align: center;
 }
+

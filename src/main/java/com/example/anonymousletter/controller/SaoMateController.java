@@ -16,6 +16,8 @@ public class SaoMateController {
 
     @GetMapping
     public String saomateHome(Model model) {
+        model.addAttribute("title", "ECHOSOUL - Kết nối SaoMate");
+        model.addAttribute("page", "saomate");
         model.addAttribute("intro", "");
         model.addAttribute("waiting", false);
         return "saomate";

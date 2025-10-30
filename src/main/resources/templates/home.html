@@ -6,15 +6,7 @@
     <title th:text="${title}">ECHOSOUL - Trang Chủ</title>
 
     <link rel="stylesheet" href="/css/style.css">
-    <style>
-        .stone img, .letter-item img {
-            width: 100%;
-            height: 180px;
-            object-fit: contain;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-    </style>
+    <script src="/js/script.js" defer></script>
 </head>
 <body>
 
@@ -53,42 +45,34 @@
 </header>
 
 <nav class="main-nav">
-    <a href="/">Trang Chủ</a>
-    <a href="/letters/send">Gửi thư</a>
-    <a href="/inbox">Bến Thư</a>
-    <a href="/sky-letter">Bầu Trời Chung</a>
-    <a href="/saomate">Trạm Sao Mate</a>
+    <a th:href="@{/}" th:classappend="${page == 'home'} ? 'active'">Trang Chủ</a>
+    <a th:href="@{/letters/send}" th:classappend="${page == 'send'} ? 'active'">Gửi Thư</a>
+    <a th:href="@{/sky-letter}" th:classappend="${page == 'sky'} ? 'active'">Bầu Trời Chung</a>
+    <a th:href="@{/inbox}" th:classappend="${page == 'inbox'} ? 'active'">Bến Thư</a>
+    <a th:href="@{/saomate}" th:classappend="${page == 'mate'} ? 'active'">Trạm SaoMate</a>
 </nav>
 
-<div class="banner"></div>
 
-<p style="text-align:center; max-width:700px; margin:0 auto 2rem; color:#ccc;" th:text="${intro}">
-</p>
+<div class="banner">
+    <p class="intro-text" th:text="${intro}"></p>
 
-<h2 class="section-title">Hãy chọn viên đá thuộc về bạn</h2>
-<div class="stones-container">
-    <div th:each="stone : ${stones}" class="stone">
-        <a th:href="@{'/stones/' + ${stone.stoneName}}">
-            <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">
-            <h3 th:text="${stone.stoneName}">Tên đá</h3>
-        </a>
+    <h2 class="section-title">Hãy chọn viên đá thuộc về bạn</h2>
+    <div class="stones-container">
+        <div th:each="stone : ${stones}" class="stone-card">
+            <a th:href="@{'/stones/' + ${stone.stoneName}}">
+                <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">
+                <h2 th:text="${stone.stoneName}">Tên đá</h2>
+                <h3 th:text="${stone.stoneFunction}">Chức năng</h3>
+            </a>
+        </div>
     </div>
+
+    <a href="/stones" class="button">Những viên đá khác</a>
 </div>
+
 <footer>
     <p>© 2025 ECHOSOUL - </p>
 </footer>
 
 </body>
-
-<script>
-    function toggleDropdown() {
-        document.getElementById("dropdown").classList.toggle("show");
-    }
-    window.onclick = function(e) {
-        if (!e.target.closest('.user-menu')) {
-            document.getElementById("dropdown").classList.remove("show");
-        }
-    };
-</script>
-
 </html>

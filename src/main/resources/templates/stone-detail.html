@@ -2,45 +2,27 @@
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${title}">Echosoul - Viên Đá Của Bạn</title>
+    <title th:text="${title}">Echosoul - Bạn</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<header>
-    <div class="header-left">
-        <h1>Echosoul</h1>
-    </div>
-    <div class="header-right">
-        <a th:href="@{/logout}" class="auth-link">Đăng xuất</a>
-    </div>
-</header>
+<div th:replace="header :: headerNav('home')"></div>
+<div class="banner">
+    <section class="stone-detail">
+        <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">
+        <div class="stone-info">
+            <h2 th:text="${stone.stoneName}">Tên Đá</h2>
+            <h3>Tác dụng</h3>
+            <p th:text="${stone.stoneFunction}">Tác dụng và năng lượng tích cực của viên đá...</p>
+            <h3>Thông điệp:</h3>
+            <p th:text="${stone.stoneMessage}">Thông điệp của viên đá...</p>
 
-<nav class="main-nav">
-    <a href="/">Trang Chủ</a>
-    <a href="/letters/send">Gửi thư</a>
-    <a href="/inbox">Bến Thư</a>
-    <a href="/sky">Bầu Trời Chung</a>
-    <a href="/saomate">Trạm Sao Mate</a>
-</nav>
-
-<div class="banner"></div>
-
-
-<section class="stone-detail">
-    <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">
-    <div class="stone-info">
-        <h2 th:text="${stone.stoneName}">Tên Đá</h2>
-        <h3>Tác dụng</h3>
-        <p th:text="${stone.stoneFunction}">Tác dụng và năng lượng tích cực của viên đá...</p>
-        <h3>Thông điệp:</h3>
-        <p th:text="${stone.stoneMessage}">Thông điệp của viên đá...</p>
-
-        <form th:action="@{'/stones/select/' + ${stone.stoneId}}" method="post">
-            <button type="submit" class="choose-btn">Chọn viên đá này</button>
-        </form>
-    </div>
-</section>
-
+            <form th:action="@{'/stones/select/' + ${stone.stoneId}}" method="post">
+                <button type="submit" class="choose-btn">Chọn viên đá này</button>
+            </form>
+        </div>
+    </section>
+</div>
 <footer>
     <p>© 2025 ECHOSOUL - Nơi những tâm hồn đồng điệu gặp nhau</p>
 </footer>

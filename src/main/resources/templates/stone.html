@@ -4,41 +4,27 @@
     <meta charset="UTF-8">
     <title th:text="${title}">Echosoul - Viên Đá Của Bạn</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="/js/script.js" defer></script>
 </head>
 <body>
-<header>
-    <div class="header-left">
-        <h1>Echosoul</h1>
-    </div>
-    <div class="header-right">
-        <a th:href="@{/logout}" class="auth-link">Đăng xuất</a>
-    </div>
-</header>
+<div th:replace="header :: headerNav('home')"></div>
+<div class="banner">
 
-<nav class="main-nav">
-    <a href="/">Trang Chủ</a>
-    <a href="/letters/send">Gửi thư</a>
-    <a href="/inbox">Bến Thư</a>
-    <a href="/sky">Bầu Trời Chung</a>
-    <a href="/saomate">Trạm Sao Mate</a>
-</nav>
+    <p class="section-intro" th:text="${intro}"></p>
 
-<div class="banner"></div>
-
-<p class="section-intro" th:text="${intro}"></p>
-
-<section>
-    <h2 class="section-title" th:text="${title}"></h2>
-    <div class="stones-container">
-        <div th:each="stone : ${stones}" class="stone-card">
-            <a th:href="@{'/stones/' + ${stone.stoneName}}">
-                <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">
-                <h3 th:text="${stone.stoneName}">Tên Đá</h3>
-            </a>
-            <p th:text="${stone.stoneFunction}">Chức năng của đá</p>
+    <section>
+        <h2 class="section-title" th:text="${title}"></h2>
+        <div class="stones-container">
+            <div th:each="stone : ${stones}" class="stone-card">
+                <a th:href="@{'/stones/' + ${stone.stoneName}}">
+                    <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">
+                    <h3 th:text="${stone.stoneName}">Tên Đá</h3>
+                </a>
+                <p th:text="${stone.stoneFunction}">Chức năng của đá</p>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
 <footer>
     <p>© 2025 ECHOSOUL - Nơi những tâm hồn đồng điệu gặp nhau</p>

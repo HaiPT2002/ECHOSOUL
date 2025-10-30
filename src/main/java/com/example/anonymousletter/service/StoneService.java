@@ -25,12 +25,12 @@ public class StoneService {
         return stoneRepository.findById(id).orElse(null);
     }
 
-    public List<Stone> get5RandomStones() {
+    public List<Stone> get4RandomStones() {
         List<Stone> stones = stoneRepository.findAll();
         Random random = new Random();
         List<Stone> copy = new java.util.ArrayList<>(stones);
         java.util.Collections.shuffle(copy, random);
-        return copy.subList(0, 5);
+        return copy.subList(0, 4);
     }
     public Stone getStonesByName(String stoneName) {
         return stoneRepository.findByStoneName(stoneName);

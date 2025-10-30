@@ -23,6 +23,7 @@ public class InboxController {
         if (!userService.isPremium(user)) {
             return "redirect:/login";
         }
+        model.addAttribute("page", "inbox");
         model.addAttribute("title", "Bến Thư");
         model.addAttribute("intro", "Nơi đây là nơi những tâm tư cần lời hồi đáp của ai đó, cũng là nơi bạn có thể giúp họ giải tỏa những cảm xúc chứa trong những bức thư ấy.");
         model.addAttribute("letters", letterService.getLetters(false, 12));

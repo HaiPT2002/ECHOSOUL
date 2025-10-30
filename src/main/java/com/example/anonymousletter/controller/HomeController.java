@@ -13,22 +13,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
+
     @Autowired
     private StoneService stoneService;
-    @Autowired
-    private UserService userService;
 
     // Trang chủ
     @GetMapping({"/", "/home"})
-    public String home(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        if (userDetails != null) {
-            User user = userService.getUserByUsername(userDetails);
-            model.addAttribute("user", user);
-            System.out.println(user.getUsername());
-        }
+    public String home(Model model) {
+        model.addAttribute("page", "home");
         model.addAttribute("title", "ECHOSOUL - Trang Chủ");
         model.addAttribute("intro", "Nơi mà tâm sự của bạn sẽ được những vì sao đón nhận. Dù bao lâu đi nữa thì những tâm tư của bạn vẫn sẽ được ghi nhớ trên vũ trụ.");
-        model.addAttribute("stones", stoneService.get5RandomStones());
+        model.addAttribute("stones", stoneService.get4RandomStones());
         return "home"; // file templates/home.html
     }
 }
+

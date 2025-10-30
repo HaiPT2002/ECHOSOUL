@@ -28,6 +28,7 @@ public class ResponseController {
     @GetMapping("/reply/{id}")
     public String showReplyForm(@PathVariable("id") Long id, Model model) {
         Letter letter = letterService.getLetterById(id);
+        model.addAttribute("title", "Phản hồi thư");
         model.addAttribute("intro", "");
         model.addAttribute("letter", letter);
         model.addAttribute("responses", responseService.getResponsesByLetter(id));

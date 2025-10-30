@@ -5,84 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký - ECHOSOUL</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <style>
-        body {
-            background: radial-gradient(circle at top, #0a0a2a, #000);
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .register-container {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 40px 50px;
-            border-radius: 20px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-            width: 360px;
-            text-align: center;
-        }
-
-        .register-container h2 {
-            margin-bottom: 25px;
-            color: #ffda00;
-        }
-
-        .register-container input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            font-size: 15px;
-        }
-
-        .register-container input::placeholder {
-            color: #bbb;
-        }
-
-        .register-container button {
-            background: linear-gradient(90deg, #ffda00, #ffb400);
-            color: #000;
-            font-weight: bold;
-            border: none;
-            padding: 12px;
-            width: 100%;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .register-container button:hover {
-            transform: scale(1.05);
-            background: linear-gradient(90deg, #ffe54d, #ffcc00);
-        }
-
-        .error-message {
-            color: #ff7777;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-
-        .login-link {
-            display: block;
-            margin-top: 15px;
-            font-size: 14px;
-            color: #ffda00;
-            text-decoration: none;
-        }
-
-        .login-link:hover {
-            text-decoration: underline;
-        }
-    </style>
 </head>
 <body>
+<header>
+    <div class="header-left">
+        <a th:href="@{/}">
+            <img src="/images/logo.png" alt="Echosoul logo">
+        </a>
+    </div>
+</header>
+
 
 <div class="register-container">
     <h2>ĐĂNG KÝ TÀI KHOẢN</h2>
