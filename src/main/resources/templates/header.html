@@ -25,10 +25,10 @@
     </header>
 
     <nav class="main-nav">
-        <a th:href="@{/}" th:classappend="${page} == 'home' ? ' active' : ''">Trang Chủ</a>
-        <a th:href="@{/letters/send}" th:classappend="${page} == 'send' ? ' active' : ''">Gửi Thư</a>
-        <a th:href="@{/sky-letter}" th:classappend="${page} == 'sky' ? ' active' : ''">Bầu Trời Chung</a>
-        <a th:href="@{/inbox}" th:classappend="${page} == 'inbox' ? ' active' : ''">Bến Thư</a>
-        <a th:href="@{/saomate}" th:classappend="${page} == 'mate' ? ' active' : ''">Trạm SaoMate</a>
+        <a th:href="@{/}" th:classappend="${page != null and page == 'home'} ? ' active' : ''">Trang Chủ</a>
+        <a th:href="@{/letters/send}" th:classappend="${page != null and page == 'send'} ? ' active' : ''">Gửi Thư</a>
+        <a th:href="@{/sky-letter}" th:classappend="${page != null and page == 'sky'} ? ' active' : ''">Bầu Trời Chung</a>
+        <a th:href="@{/inbox}" th:classappend="${page != null and page == 'inbox'} ? ' active' : ''">Bến Thư</a>
+        <a th:href="@{/saomate}" th:classappend="${page != null and page == 'mate'} ? ' active' : ''">Trạm SaoMate</a>
     </nav>
 </div>

@@ -2,11 +2,11 @@
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${title}">Echosoul - Bạn</title>
+    <title th:text="${title}">ECHOSOUL - Viên đá của bạn</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div th:replace="header :: headerNav('home')"></div>
+<div th:replace="~{header :: headerNav('')}"></div>
 <div class="banner">
     <section class="stone-detail">
         <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">

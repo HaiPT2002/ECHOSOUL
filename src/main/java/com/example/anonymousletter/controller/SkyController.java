@@ -19,7 +19,6 @@ public class SkyController {
     @RequestMapping("/sky-letter")
     public String skyLetter(Model model) {
         model.addAttribute("title", "ECHOSOUL - Bầu trời chung");
-        model.addAttribute("page", "sky");
         model.addAttribute("intro", "");
         model.addAttribute("skyLetters", letterService.getLetters(true, 6));
         return "sky-letter";

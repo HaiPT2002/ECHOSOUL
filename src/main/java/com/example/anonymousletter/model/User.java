@@ -23,6 +23,7 @@ public class User {
 
     // --- Mối quan hệ với Role ---
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "roleId", nullable = false)
     private Role role;
 

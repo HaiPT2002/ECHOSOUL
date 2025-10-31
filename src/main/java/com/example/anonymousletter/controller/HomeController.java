@@ -20,7 +20,6 @@ public class HomeController {
     // Trang chủ
     @GetMapping({"/", "/home"})
     public String home(Model model) {
-        model.addAttribute("page", "home");
         model.addAttribute("title", "ECHOSOUL - Trang Chủ");
         model.addAttribute("intro", "Nơi mà tâm sự của bạn sẽ được những vì sao đón nhận. Dù bao lâu đi nữa thì những tâm tư của bạn vẫn sẽ được ghi nhớ trên vũ trụ.");
         model.addAttribute("stones", stoneService.get4RandomStones());

@@ -9,11 +9,11 @@
 </head>
 <body>
 
-<div th:replace="header :: headerNav('send')"></div>
+<div th:replace="~{header :: headerNav('send')}"></div>
 
 <div class="container">
     <div class="letter-box">
-        <h2>Gửi Thư Ẩn Danh</h2>
+        <h2>Gửi Thư</h2>
         <p class="intro-text" th:text="${intro}"></p>
 
         <form th:action="@{/letters/send}" method="post" th:object="${letter}">

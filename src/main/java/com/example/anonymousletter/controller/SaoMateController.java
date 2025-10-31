@@ -1,8 +1,12 @@
 package com.example.anonymousletter.controller;
 
+import com.example.anonymousletter.model.User;
 import com.example.anonymousletter.service.SaomateService;
+import com.example.anonymousletter.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +17,8 @@ public class SaoMateController {
 
     @Autowired
     private SaomateService saoMateService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public String saomateHome(Model model) {
@@ -24,29 +30,15 @@ public class SaoMateController {
     }
 
     @PostMapping("/ready")
-    public String ready(HttpSession session, Model model) {
-        Long userId = (Long) session.getAttribute("userId");
-
-        Long roomId = saoMateService.findPartner(userId);
+    public String ready(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        User user = userService.getUserByUsername(userDetails);
+        Long roomId = saoMateService.findPartner(user.getUserId());
 
         if (roomId == null) {
             model.addAttribute("waiting", true);
             return "saomate";
         } else {
-            return "redirect:/saomate/room/" + roomId;
+            return "redirect:/room/" + roomId;
         }
-    }
-
-    @GetMapping("/room/{roomId}")
-    public String chatRoom(@PathVariable Long roomId, Model model) {
-        model.addAttribute("roomId", roomId);
-        return "saomate_room";
-    }
-
-    @PostMapping("/end")
-    public String endChat(@RequestParam Long roomId, HttpSession session) {
-        saoMateService.endChat(roomId);
-        Long userId = (Long) session.getAttribute("userId");
-        return "redirect:/saomate";
     }
 }

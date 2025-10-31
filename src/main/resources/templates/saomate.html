@@ -10,7 +10,8 @@
 </head>
 <body>
 
-<div th:replace="header :: headerNav('saomate')"></div>
+<div th:replace="~{header :: headerNav('saomate')}"></div>
+
 <div class="banner">
   <h1>Kết nối SaoMate ✨</h1>
   <p class="intro-text" th:text="${intro}"></p>

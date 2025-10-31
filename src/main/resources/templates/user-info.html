@@ -8,6 +8,31 @@
     <script src="/js/script.js" defer></script>
 </head>
 <body>
+<div th:replace="~{header :: headerNav('')}"></div>
+<div class="banner">
+    <h2>(Title?)</h2>
+    <p class="intro-text" th:text="${intro}"></p>
+    <div class="user-info-container">
+        <!-- Bên trái: thông tin cá nhân -->
+        <div class="user-info-left">
+            <h2 th:text="${u}">Tên người dùng</h2>
+            <p><strong>Chòm sao:</strong> <span th:text="${user.zodiac}">Bạch Dương</span></p>
+            <p><strong>Sở thích:</strong> <span th:text="${user.hobby}">Đọc sách, Nghe nhạc</span></p>
+            <p><strong>Đá phong thủy:</strong> <span th:text="${user.stone}">Thạch Anh, Ruby</span></p>
 
+            <div class="user-action-buttons">
+                <a th:href="@{/user/edit}" class="button">Sửa thông tin</a>
+                <a th:href="@{/user/avatar}" class="button">Thêm/Sửa ảnh đại diện</a>
+                <a th:if="${!#lists.contains(user.role, 'PREMIUM')}" th:href="@{/premium/buy}" class="button">Mua gói Premium</a>
+            </div>
+        </div>
+
+        <!-- Bên phải: ảnh đại diện -->
+        <div class="user-info-right">
+            <img th:src="${user.avatarUrl != null and !user.avatarUrl.isEmpty() ? user.avatarUrl : '/images/user-icon.png'}"
+                 alt="Ảnh đại diện" class="user-avatar">
+        </div>
+    </div>
+</div>
 </body>
 </html>

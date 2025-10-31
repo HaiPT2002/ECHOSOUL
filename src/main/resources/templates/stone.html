@@ -2,12 +2,13 @@
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${title}">Echosoul - Viên Đá Của Bạn</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <script src="/js/script.js" defer></script>
 </head>
 <body>
-<div th:replace="header :: headerNav('home')"></div>
+<div th:replace="~{header :: headerNav('')}"></div>
 <div class="banner">
 
     <p class="section-intro" th:text="${intro}"></p>

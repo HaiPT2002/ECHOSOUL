@@ -23,6 +23,7 @@ public class Role {
     private String roleName;
 
     // --- Quan hệ ngược với User ---
+    @ToString.Exclude
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private List<User> users;
 }

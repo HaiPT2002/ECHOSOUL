@@ -83,6 +83,60 @@ header {
 .main-nav a {
     font-size: 1.4rem; /* or use px like 18px */
 }
+/* ================== USER INFO PAGE ================== */
+.user-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 2rem;
+    gap: 2rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    flex-wrap: wrap;
+}
+
+.user-info-left {
+    flex: 1;
+    min-width: 280px;
+}
+
+.user-info-left h2 {
+    color: #D6E010;
+    margin-bottom: 1rem;
+}
+
+.user-info-left p {
+    color: #fff;
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.user-action-buttons {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.user-info-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 280px;
+}
+
+.user-info-right .user-avatar {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 20px;
+    border: 3px solid #D6E010;
+    object-fit: cover;
+    box-shadow: 0 0 20px rgba(255,218,0,0.3);
+}
 
 /* ================== INTRO TEXT TRÊN BANNER ================== */
 
