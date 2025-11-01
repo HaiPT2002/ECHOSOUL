@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gửi thư ẩn danh - ECHOSOUL</title>
+    <title th:text="${title}">ECHOSOUL - Gửi thư</title>
+
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/script.js" defer></script>
 </head>
@@ -11,30 +12,33 @@
 
 <div th:replace="~{header :: headerNav('send')}"></div>
 
-<div class="container">
-    <div class="letter-box">
-        <h2>Gửi Thư</h2>
-        <p class="intro-text" th:text="${intro}"></p>
+<div class="banner">
 
-        <form th:action="@{/letters/send}" method="post" th:object="${letter}">
-            <textarea th:field="*{content}" placeholder="Viết điều bạn muốn chia sẻ..." required></textarea>
+    <section class="page-section">
+        <div class="letter-write-box"> <!-- paper -->
+            <h2 class="section-title">Hãy viết những điều bạn muốn nói <3</h2>
 
-            <label style="display:block;margin-top:10px;">
-                <input type="checkbox" name="anonymous" th:checked="${isAnonymous}"> Gửi ẩn danh
-            </label>
+            <form th:action="@{/letters/send}" method="post" th:object="${letter}">
+                <textarea class="letter-textarea" th:field="*{content}" placeholder="Viết điều bạn muốn chia sẻ..." required></textarea>
 
-            <button type="submit">Gửi Thư</button>
-        </form>
-    </div>
+                <label class="check-anon">
+                    <input type="checkbox" name="anonymous" th:checked="${isAnonymous}"> Gửi ẩn danh
+                </label>
 
-    <div class="encouragement-box" th:if="${encouragement}">
-        <h3>Lời Động Viên 💬</h3>
-        <p class="encouragement-text" th:text="${encouragement}"></p>
-    </div>
+                <button type="submit" class="button">Gửi Thư</button>
+            </form>
+
+            <div class="encouragement-box" th:if="${encouragement}">
+                <h3>Lời Động Viên 💬</h3>
+                <p class="encouragement-text" th:text="${encouragement}"></p>
+            </div>
+        </div>
+    </section>
+
 </div>
 
 <footer>
-    <p>© 2025 ECHOSOUL - </p>
+    <p class="footer">© 2025 ECHOSOUL - </p>
 </footer>
 
 

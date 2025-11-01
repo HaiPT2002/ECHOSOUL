@@ -11,24 +11,40 @@
 <div th:replace="~{header :: headerNav('')}"></div>
 <div class="banner">
 
-    <p class="section-intro" th:text="${intro}"></p>
+    <p class="intro-text" th:text="${intro}"></p>
 
-    <section>
-        <h2 class="section-title" th:text="${title}"></h2>
-        <div class="stones-container">
-            <div th:each="stone : ${stones}" class="stone-card">
-                <a th:href="@{'/stones/' + ${stone.stoneName}}">
-                    <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">
-                    <h3 th:text="${stone.stoneName}">Tên Đá</h3>
-                </a>
-                <p th:text="${stone.stoneFunction}">Chức năng của đá</p>
-            </div>
+    <h2 class="section-title" th:text="${title}"></h2>
+
+    <div class="stones-container">
+        <div th:each="stone : ${stones}" class="stone-card"
+             th:attr="data-function=${stone.stoneFunction}">
+            <a th:href="@{'/stones/' + ${stone.stoneName}}">
+                <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">
+                <h2 class="stone-title" th:text="${stone.stoneName}">Tên đá</h2>
+            </a>
         </div>
-    </section>
+    </div>
+
+    <div id="stone-tooltip"></div>
 </div>
 
 <footer>
-    <p>© 2025 ECHOSOUL - Nơi những tâm hồn đồng điệu gặp nhau</p>
+    <p class="footer">© 2025 ECHOSOUL - Nơi những tâm hồn đồng điệu gặp nhau</p>
 </footer>
 </body>
+
+<script>
+    const tooltip = document.getElementById("stone-tooltip");
+    document.querySelectorAll('.stone-card').forEach(card => {
+        card.addEventListener("mousemove", (e) => {
+            tooltip.innerText = card.dataset.function;
+            tooltip.style.display = "block";
+            tooltip.style.left = e.clientX + 15 + "px";
+            tooltip.style.top = e.clientY + 15 + "px";
+        });
+        card.addEventListener("mouseleave", () => {
+            tooltip.style.display = "none";
+        });
+    });
+</script>
 </html>

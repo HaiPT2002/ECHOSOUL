@@ -58,7 +58,7 @@ public class SecurityConfig {
                         .permitAll()
                 )
 
-                .csrf(AbstractHttpConfigurer::disable)
+//                .csrf(AbstractHttpConfigurer::disable)
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()));
 
         return http.build();

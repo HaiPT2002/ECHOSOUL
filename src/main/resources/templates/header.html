@@ -1,34 +1,46 @@
 <!-- templates/header.html -->
-<!— Header + Nav fragment for Thymeleaf —>
 <div th:fragment="headerNav(page)">
     <header>
         <div class="header-left">
             <a th:href="@{/}">
-                <img src="/images/logo.png" alt="Echosoul logo">
+                <img src="/images/logo.png" alt="Echosoul logo" class="logo-img">
             </a>
         </div>
 
-        <div class="user-icon" onclick="toggleDropdown()">
-            <img src="/images/user-icon.png" alt="User Icon">
-        </div>
+        <div class="header-right">
 
-        <div id="dropdown" class="dropdown-content">
-            <a th:href="@{/profile}">👤 Thông tin cá nhân</a>
-            <a th:href="@{/premium}">⭐ Nâng cấp Premium</a>
-            <a th:href="@{/sent}">💌 Thư đã gửi</a>
-            <a th:href="@{/inbox}">📥 Hòm thư đến</a>
-            <a th:href="@{/settings}">⚙️ Cài đặt tài khoản</a>
-            <form th:action="@{/logout}" method="post" style="margin:0;">
-                <button type="submit" class="logout-btn">🚪 Đăng xuất</button>
-            </form>
+            <!-- Nếu chưa login -->
+            <div th:if="${user == null or user.username == null}">
+                <a href="/login" class="auth-link">Đăng nhập</a> /
+                <a href="/register" class="auth-link">Đăng ký</a>
+            </div>
+
+            <!-- đã login -->
+            <div th:if="${user != null and user.username != null}" class="user-menu">
+                <div class="user-icon" onclick="toggleDropdown()">
+                    <img src="/images/user-icon.png" alt="User Icon" class="user-icon-img">
+                </div>
+
+                <div id="dropdown" class="dropdown-content">
+                    <a th:href="@{/profile}">👤 Thông tin cá nhân</a>
+                    <a th:href="@{/premium}">⭐ Nâng cấp Premium</a>
+                    <a th:href="@{/sent}">💌 Thư đã gửi</a>
+                    <a th:href="@{/inbox}">📥 Hòm thư đến</a>
+                    <a th:href="@{/settings}">⚙️ Cài đặt tài khoản</a>
+                    <form th:action="@{/logout}" method="post" style="margin:0;">
+                        <button type="submit" class="logout-btn">🚪 Đăng xuất</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </header>
 
     <nav class="main-nav">
-        <a th:href="@{/}" th:classappend="${page != null and page == 'home'} ? ' active' : ''">Trang Chủ</a>
-        <a th:href="@{/letters/send}" th:classappend="${page != null and page == 'send'} ? ' active' : ''">Gửi Thư</a>
-        <a th:href="@{/sky-letter}" th:classappend="${page != null and page == 'sky'} ? ' active' : ''">Bầu Trời Chung</a>
-        <a th:href="@{/inbox}" th:classappend="${page != null and page == 'inbox'} ? ' active' : ''">Bến Thư</a>
-        <a th:href="@{/saomate}" th:classappend="${page != null and page == 'mate'} ? ' active' : ''">Trạm SaoMate</a>
+        <a th:href="@{/}" th:classappend="${page == 'home'} ? ' active' : ''">Trang Chủ</a>
+        <a th:href="@{/letters/send}" th:classappend="${page == 'send'} ? ' active' : ''">Gửi Thư</a>
+        <a th:href="@{/sky-letter}" th:classappend="${page == 'sky'} ? ' active' : ''">Bầu Trời Chung</a>
+        <a th:href="@{/inbox}" th:classappend="${page == 'inbox'} ? ' active' : ''">Bến Thư</a>
+        <a th:href="@{/saomate}" th:classappend="${page == 'mate'} ? ' active' : ''">Trạm SaoMate</a>
     </nav>
 </div>
+

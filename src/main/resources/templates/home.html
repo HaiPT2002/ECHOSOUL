@@ -13,43 +13,41 @@
 <header>
     <div class="header-left">
         <a href="/">
-            <img src="/images/logo.png" alt="Echosoul logo">
+            <img src="/images/logo.png" alt="Echosoul logo" class="img">
         </a>
     </div>
 
     <div class="header-right">
-        <!-- Nếu người dùng CHƯA đăng nhập -->
         <div th:if="${user == null or user.username == null}">
-            <a href="/login" class="auth-link">Đăng nhập</a> /
-            <a href="/register" class="auth-link">Đăng ký</a>
+            <a href="/login" class="auth-link nav-link">Đăng nhập</a> /
+            <a href="/register" class="auth-link nav-link">Đăng ký</a>
         </div>
 
-        <!-- Nếu người dùng ĐÃ đăng nhập -->
         <div th:if="${user != null and user.username != null}" class="user-menu">
             <div class="user-icon" onclick="toggleDropdown()">
-                <img src="/images/user-icon.png" alt="User Icon">
+                <img src="/images/user-icon.png" alt="User Icon" class="user-icon-img">
             </div>
+
             <div id="dropdown" class="dropdown-content">
-                <a href="/profile">👤 Thông tin cá nhân</a>
-                <a href="/premium">⭐ Nâng cấp Premium</a>
-                <a href="/sent">💌 Thư đã gửi</a>
-                <a href="/inbox">📥 Hòm thư đến</a>
-                <a href="/settings">⚙️ Cài đặt tài khoản</a>
+                <a href="/profile" class="nav-link">👤 Thông tin cá nhân</a>
+                <a href="/premium" class="nav-link">⭐ Nâng cấp Premium</a>
+                <a href="/sent" class="nav-link">💌 Thư đã gửi</a>
+                <a href="/inbox" class="nav-link">📥 Hòm thư đến</a>
+                <a href="/settings" class="nav-link">⚙️ Cài đặt tài khoản</a>
                 <form th:action="@{/logout}" method="post" style="margin:0;">
-                    <button type="submit" class="logout-btn">🚪 Đăng xuất</button>
+                    <button type="submit" class="logout-btn nav-link">🚪 Đăng xuất</button>
                 </form>
             </div>
         </div>
     </div>
-
 </header>
 
 <nav class="main-nav">
-    <a th:href="@{/}" th:classappend="${page == 'home'} ? 'active'">Trang Chủ</a>
-    <a th:href="@{/letters/send}" th:classappend="${page == 'send'} ? 'active'">Gửi Thư</a>
-    <a th:href="@{/sky-letter}" th:classappend="${page == 'sky'} ? 'active'">Bầu Trời Chung</a>
-    <a th:href="@{/inbox}" th:classappend="${page == 'inbox'} ? 'active'">Bến Thư</a>
-    <a th:href="@{/saomate}" th:classappend="${page == 'mate'} ? 'active'">Trạm SaoMate</a>
+    <a th:href="@{/}" th:classappend="${page == 'home'} ? 'active'" class="nav-link">Trang Chủ</a>
+    <a th:href="@{/letters/send}" th:classappend="${page == 'send'} ? 'active'" class="nav-link">Gửi Thư</a>
+    <a th:href="@{/sky-letter}" th:classappend="${page == 'sky'} ? 'active'" class="nav-link">Bầu Trời Chung</a>
+    <a th:href="@{/inbox}" th:classappend="${page == 'inbox'} ? 'active'" class="nav-link">Bến Thư</a>
+    <a th:href="@{/saomate}" th:classappend="${page == 'mate'} ? 'active'" class="nav-link">Trạm SaoMate</a>
 </nav>
 
 
@@ -57,22 +55,40 @@
     <p class="intro-text" th:text="${intro}"></p>
 
     <h2 class="section-title">Hãy chọn viên đá thuộc về bạn</h2>
+
     <div class="stones-container">
-        <div th:each="stone : ${stones}" class="stone-card">
+        <div th:each="stone : ${stones}" class="stone-card"
+             th:attr="data-function=${stone.stoneFunction}">
             <a th:href="@{'/stones/' + ${stone.stoneName}}">
                 <img th:src="@{'/images/stones/' + ${stone.stoneName} + '.png'}" alt="stone image">
-                <h2 th:text="${stone.stoneName}">Tên đá</h2>
-                <h3 th:text="${stone.stoneFunction}">Chức năng</h3>
+                <h2 class="stone-title" th:text="${stone.stoneName}">Tên đá</h2>
             </a>
         </div>
     </div>
+
+    <div id="stone-tooltip"></div>
 
     <a href="/stones" class="button">Những viên đá khác</a>
 </div>
 
 <footer>
-    <p>© 2025 ECHOSOUL - </p>
+    <p class="footer">© 2025 ECHOSOUL</p>
 </footer>
 
 </body>
+
+<script>
+    const tooltip = document.getElementById("stone-tooltip");
+    document.querySelectorAll('.stone-card').forEach(card => {
+        card.addEventListener("mousemove", (e) => {
+            tooltip.innerText = card.dataset.function;
+            tooltip.style.display = "block";
+            tooltip.style.left = e.clientX + 15 + "px";
+            tooltip.style.top = e.clientY + 15 + "px";
+        });
+        card.addEventListener("mouseleave", () => {
+            tooltip.style.display = "none";
+        });
+    });
+</script>
 </html>

@@ -18,13 +18,13 @@
             <p th:text="${stone.stoneMessage}">Thông điệp của viên đá...</p>
 
             <form th:action="@{'/stones/select/' + ${stone.stoneId}}" method="post">
-                <button type="submit" class="choose-btn">Chọn viên đá này</button>
+                <button type="submit" class="button">Chọn viên đá này</button>
             </form>
         </div>
     </section>
 </div>
 <footer>
-    <p>© 2025 ECHOSOUL - Nơi những tâm hồn đồng điệu gặp nhau</p>
+    <p class="footer">© 2025 ECHOSOUL - Nơi những tâm hồn đồng điệu gặp nhau</p>
 </footer>
 </body>
 </html>

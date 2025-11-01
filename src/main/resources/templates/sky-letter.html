@@ -12,24 +12,23 @@
 
     <section>
 
-        <p class="section-intro" th:text="${intro}">
-        </p>
+        <p class="intro-text" th:text="${intro}"></p>
 
-        <div class="sky-container">
-            <div th:each="letter : ${skyLetters}" class="sky-card">
+        <div class="letter-container">
+            <div th:each="letter : ${skyLetters}" class="letter-card">
 
                 <!-- ảnh/preview (nếu letter.stone có imageUrl thì dùng, nếu không dùng banner chung) -->
                 <img th:src="${letter.stone != null && letter.stone.imageUrl != null ? letter.stone.imageUrl : '/images/sky-banner.png'}"
                      alt="ảnh thư">
 
-                <div class="content" th:text="${letter.content}">Nội dung thư ẩn danh...</div>
+                <div class="letter-content" th:text="${letter.content}">Nội dung thư ẩn danh...</div>
 
             </div>
         </div>
     </section>
 </div>
 <footer>
-    <p>© 2025 ECHOSOUL - Nơi những tâm hồn đồng điệu gặp nhau</p>
+    <p class="footer">© 2025 ECHOSOUL - Nơi những tâm hồn đồng điệu gặp nhau</p>
 </footer>
 </body>
 </html>

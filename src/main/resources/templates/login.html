@@ -10,31 +10,38 @@
 <header>
     <div class="header-left">
         <a th:href="@{/}">
-            <img src="/images/logo.png" alt="Echosoul logo">
+            <img src="/images/logo.png" alt="Echosoul logo" class="logo-img">
         </a>
     </div>
 </header>
 
 <div class="banner">
-    <div class="page-center">
-        <p class="intro-text" th:text="${intro}"></p>
 
-        <div class="form-container login-container">
-            <h2>ĐĂNG NHẬP</h2>
-            <form th:action="@{/process-login}" method="post">
-                <div th:if="${param.error}" class="error-message">
-                    Sai tên đăng nhập hoặc mật khẩu!
-                </div>
+    <p class="intro-text" th:text="${intro}"></p>
 
-                <input type="text" name="username" placeholder="Tên đăng nhập" required>
-                <input type="password" name="password" placeholder="Mật khẩu" required>
+    <div class="form-container">
+        <h2>ĐĂNG NHẬP</h2>
+        <form th:action="@{/process-login}" method="post">
+            <div th:if="${param.error}" class="error-message">
+                Sai tên đăng nhập hoặc mật khẩu!
+            </div>
 
-                <button type="submit">Đăng nhập</button>
-            </form>
-        <a class="back-home" th:href="@{/register}">Chưa có tài khoản? Đăng ký</a>
-        <a class="back-home" th:href="@{/}">Về trang chủ</a>
-        </div>
+            <input type="text" name="username" placeholder="Tên đăng nhập" required>
+            <input type="password" name="password" placeholder="Mật khẩu" required>
+
+            <button type="submit" class="button">Đăng nhập</button>
+        </form>
+
+        <a th:href="@{/register}">Chưa có tài khoản? Đăng ký</a>
+
+        <a th:href="@{/}">Về trang chủ</a>
     </div>
 </div>
 </body>
+
+
+<footer>
+    <p class="footer">© 2025 ECHOSOUL</p>
+</footer>
+
 </html>

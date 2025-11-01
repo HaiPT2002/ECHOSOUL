@@ -5,51 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký - ECHOSOUL</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="/js/script.js" defer></script>
 </head>
+
 <body>
 <header>
     <div class="header-left">
-        <a th:href="@{/}">
-            <img src="/images/logo.png" alt="Echosoul logo">
+        <a href="/">
+            <img src="/images/logo.png" alt="Echosoul logo" class="img">
         </a>
     </div>
 </header>
 
+<div class="banner">
+    <p class="intro-text" th:text="${intro}"></p>
 
-<div class="register-container">
-    <h2>ĐĂNG KÝ TÀI KHOẢN</h2>
+    <div class="form-container">
+        <h2>ĐĂNG KÝ TÀI KHOẢN</h2>
 
-    <form th:action="@{/register}" th:object="${user}" method="post" onsubmit="return validateForm()">
-        <div th:if="${error}" class="error-message" th:text="${error}"></div>
+        <form th:action="@{/register}" th:object="${user}" method="post" onsubmit="return validateForm()">
+            <div th:if="${error}" class="error-message" th:text="${error}"></div>
 
-        <input type="text" th:field="*{username}" placeholder="Tên đăng nhập" required>
-        <input type="email" th:field="*{email}" placeholder="Email (nếu có)">
-        <input type="password" id="password" th:field="*{password}" placeholder="Mật khẩu" required>
-        <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+            <input type="text" th:field="*{username}" placeholder="Tên đăng nhập" required>
+            <input type="email" th:field="*{email}" placeholder="Email (nếu có)">
+            <input type="password" id="password" th:field="*{password}" placeholder="Mật khẩu" required>
+            <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu" required>
 
-        <div id="passwordError" class="error-message" style="display:none;">Mật khẩu không khớp!</div>
+            <div id="passwordError" class="error-message" style="display:none;">Mật khẩu không khớp!</div>
 
-        <button type="submit">Đăng ký</button>
-    </form>
+            <button type="submit">Đăng ký</button>
+        </form>
 
-    <a class="login-link" th:href="@{/login}">← Đã có tài khoản? Đăng nhập</a>
+        <a th:href="@{/login}">← Đã có tài khoản? Đăng nhập</a>
+    </div>
 </div>
-
-<script>
-    function validateForm() {
-        const password = document.getElementById("password").value;
-        const confirmPassword = document.getElementById("confirmPassword").value;
-        const errorMsg = document.getElementById("passwordError");
-
-        if (password !== confirmPassword) {
-            errorMsg.style.display = "block";
-            return false; // chặn form gửi đi
-        } else {
-            errorMsg.style.display = "none";
-            return true;
-        }
-    }
-</script>
-
 </body>
+
+<footer>
+    <p class="footer">© 2025 ECHOSOUL</p>
+</footer>
 </html>

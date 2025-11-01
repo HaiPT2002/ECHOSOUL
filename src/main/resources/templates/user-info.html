@@ -6,33 +6,80 @@
 
     <link rel="stylesheet" href="/css/style.css">
     <script src="/js/script.js" defer></script>
+
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
 </head>
 <body>
 <div th:replace="~{header :: headerNav('')}"></div>
-<div class="banner">
-    <h2>(Title?)</h2>
-    <p class="intro-text" th:text="${intro}"></p>
-    <div class="user-info-container">
-        <!-- Bên trái: thông tin cá nhân -->
-        <div class="user-info-left">
-            <h2 th:text="${u}">Tên người dùng</h2>
-            <p><strong>Chòm sao:</strong> <span th:text="${user.zodiac}">Bạch Dương</span></p>
-            <p><strong>Sở thích:</strong> <span th:text="${user.hobby}">Đọc sách, Nghe nhạc</span></p>
-            <p><strong>Đá phong thủy:</strong> <span th:text="${user.stone}">Thạch Anh, Ruby</span></p>
 
-            <div class="user-action-buttons">
-                <a th:href="@{/user/edit}" class="button">Sửa thông tin</a>
-                <a th:href="@{/user/avatar}" class="button">Thêm/Sửa ảnh đại diện</a>
-                <a th:if="${!#lists.contains(user.role, 'PREMIUM')}" th:href="@{/premium/buy}" class="button">Mua gói Premium</a>
+<div class="banner">
+    <h2 class="section-title">Hồ sơ của tôi</h2>
+    <p class="intro-text" th:text="${intro}"></p>
+
+    <div class="user-info-container">
+        <!-- Thông tin cá nhân -->
+            <!-- Avatar -->
+        <div class="user-info-right">
+            <div class="avatar-container">
+                <img th:src="${user.avatarUrl != null ? user.avatarUrl : '/images/user-icon.png'}"
+                     alt="Ảnh đại diện" class="avatar-img">
             </div>
         </div>
 
-        <!-- Bên phải: ảnh đại diện -->
-        <div class="user-info-right">
-            <img th:src="${user.avatarUrl != null and !user.avatarUrl.isEmpty() ? user.avatarUrl : '/images/user-icon.png'}"
-                 alt="Ảnh đại diện" class="user-avatar">
+        <div class="user-info-left">
+            <!-- Tên người dùng -->
+            <p>
+                <strong>Tên:</strong>
+                <span class="editable" id="nameText" th:text="${user.username}">Người dùng</span>
+                <input type="text" id="nameInput" th:value="${user.username}" style="display:none;">
+            </p>
+
+
+            <!-- Chòm sao -->
+            <p>
+                <strong>Chòm sao:</strong>
+                <span class="editable" id="zodiacText" th:text="${user.zodiac}">Bạch Dương</span>
+                <input type="text" id="zodiacInput" th:value="${user.zodiac}" style="display:none;">
+            </p>
+
+            <!-- Sở thích -->
+            <p>
+                <strong>Sở thích:</strong>
+                <span class="editable" id="hobbiesText" th:text="${user.hobby}">Đọc sách, Nghe nhạc</span>
+                <input type="text" id="hobbiesInput" th:value="${user.hobby}" style="display:none;">
+            </p>
+
+            <!-- Đá phong thủy -->
+            <p>
+                <strong>Đá phong thủy:</strong>
+                <span class="editable" id="stoneText" th:text="${user.stone.stoneName}">Thạch Anh</span>
+                <input type="text" id="stoneInput" th:value="${user.stone.stoneName}" style="display:none;">
+            </p>
+
+            <!-- Nút hành động -->
+            <div class="user-action-buttons">
+                <button id="editBtn" class="button">Sửa thông tin</button>
+                <button id="saveBtn" class="button" style="display:none;">Lưu thông tin</button>
+                <button id="cancelBtn" class="button" style="display:none;">Hủy</button>
+                <button id="avatarBtn" class="button">Thêm/Sửa ảnh đại diện</button>
+            </div>
         </div>
     </div>
 </div>
+
+<!-- Modal chỉnh sửa avatar -->
+<div id="avatarModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form th:action="@{/profile/avatar}" method="post" enctype="multipart/form-data">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <input type="file" name="avatar" accept="image/*" required>
+            <button type="submit" class="button">Cập nhật</button>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>
